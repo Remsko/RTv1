@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 20:17:46 by nboste            #+#    #+#             */
-/*   Updated: 2018/01/24 14:09:23 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/24 16:00:07 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define VECTOR_UTILITY_H
 
 #include "rtv1.h"
+
+t_point vector_mul(t_point p1, double d);
+
+t_point vector_add(t_point p1, t_point p2);
+
+double	vector_multiply(t_point p1, t_point p2);
 
 t_point vector_sub(t_point p1, t_point p2);
 

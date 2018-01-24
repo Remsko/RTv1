@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/31 20:38:35 by nboste            #+#    #+#             */
-/*   Updated: 2018/01/24 14:43:24 by rpinoit          ###   ########.fr       */
+/*   Created: 2018/01/24 14:52:08 by rpinoit           #+#    #+#             */
+/*   Updated: 2018/01/24 16:09:52 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static double	get_delta(double a, double b, double c)
 {
 	return (b * b - 4 * a * c);
 }
-
+/*
 static double dotProduct(t_point p1, t_point p2)
 {
 	double n1;
@@ -28,7 +28,7 @@ static double dotProduct(t_point p1, t_point p2)
 	n1 = get_norm(p1);
 	n2 = get_norm(p2);
 	return (p1.x * p2.x + p1.y * p2.y + p1.z * p2.z);
-}
+} */
 
 static t_bool   inter_cylinder(t_ray r, t_object *obj, t_point *inter)
 {
@@ -38,10 +38,10 @@ static t_bool   inter_cylinder(t_ray r, t_object *obj, t_point *inter)
 	double  delta;
 
 	dir = r.dir;
-	pos = r.pos;
+	pos = vector_sub(r.pos, obj->pos);
 	poly.x = (dir.x * dir.x + dir.y * dir.y);
-	poly.y = 2 * dir.x * (pos.x - obj->pos.x) + 2 * dir.y * (pos.y - obj->pos.y);
-	poly.z = pow(pos.x - obj->pos.x, 2) + pow(pos.y - obj->pos.y, 2) - pow(obj->radius, 2);
+	poly.y = 2 * dir.x * pos.x + 2 * dir.y * pos.y;
+	poly.z = pow(pos.x, 2) + pow(pos.y, 2) - pow(obj->radius, 2);
 	delta = get_delta(poly.x, poly.y, poly.z);
 	if (delta < 0)
 		return (0);
@@ -71,12 +71,14 @@ static t_bool          inter_cone(t_ray r, t_object *obj, t_point *inter)
 	t_point dir;
 	t_point poly;
 	double  delta;
+	double	radius;
 
 	dir = r.dir;
-	pos = r.pos;
-	poly.x = (dir.x * dir.x) + (dir.y * dir.y) - (dir.z * dir.z);
-	poly.y = 2 * ((dir.x * (pos.x - obj->pos.x)) + (dir.y * (pos.y - obj->pos.y)) - (dir.z * (pos.z - obj->pos.z)));
-	poly.z = pow(pos.x - obj->pos.x, 2) + pow(pos.y - obj->pos.y, 2) - pow(pos.z - obj->pos.z, 2);
+	pos = vector_sub(r.pos, obj->pos);
+	radius = sin(ft_degtorad(obj->radius)) * sin(ft_degtorad(obj->radius));
+	poly.x = (dir.x * dir.x) + (dir.y * dir.y) - (dir.z * dir.z * radius);
+	poly.y = 2 * ((dir.x * pos.x) + (dir.y * pos.y) - (radius * dir.z * pos.z));
+	poly.z = pow(pos.x, 2) + pow(pos.y, 2) - pow(pos.z, 2) * radius;
 	delta = get_delta(poly.x, poly.y, poly.z);
 	if (delta < 0)
 		return (0);
@@ -139,25 +141,32 @@ static t_bool	inter_sphere(t_ray r, t_object *obj, t_point *inter)
 
 static t_bool	inter_plan(t_ray r, t_object *obj, t_point *inter)
 {
-	t_point		l;
-	t_point		n;
-	t_point		p0;
-	t_point		l0;
-	double		denom;
+	t_point	n;
+	t_point	l;
+	double	m;
+	double	t;
+	double	d;
+	t_point pos;
 
-	l = r.dir;
 	n = obj->normal;
-	p0 = obj->pos;
-	l0 = r.pos;
-	denom = dotProduct(n, l);
-	if (denom > 1e-9)
+	normalize_vector(&n);
+	m = vector_multiply(n, r.dir);
+	if (fabs(m) < 0.000001)
+		return (0);
+	l = vector_sub(r.pos, obj->pos);
+	d = vector_multiply(n, l);
+	t = -d / m;
+	pos = vector_add(r.pos, vector_mul(r.dir, t));
+	if (t <= 0.000001)
+		return (0);
+	else
 	{
-		inter->x = r.pos.x + denom * r.dir.x;
-		inter->y = r.pos.y + denom * r.dir.y;
-		inter->z = r.pos.z + denom * r.dir.z;
-		return 1;
+		inter->x = r.pos.x + t * r.dir.x;
+		inter->y = r.pos.y + t * r.dir.y;
+		inter->z = r.pos.z + t * r.dir.z;
+		return (1);
 	}
-	return 0;
+	return (0);
 }
 
 t_bool			intersection(t_ray r, t_object *obj, t_point *inter)
