@@ -6,7 +6,7 @@
 #    By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/24 11:54:00 by rpinoit           #+#    #+#              #
-#    Updated: 2018/01/24 11:59:42 by rpinoit          ###   ########.fr        #
+#    Updated: 2018/01/24 13:23:22 by rpinoit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ SRC = srcs/main.c \
 	  srcs/drawer.c \
 	  srcs/event.c \
 	  srcs/raytracer.c \
-	  srcs/camera.c \
 	  srcs/vector_utility.c \
 	  srcs/intersection.c \
 	  srcs/light.c \
