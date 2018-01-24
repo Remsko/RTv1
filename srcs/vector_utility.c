@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 20:17:23 by nboste            #+#    #+#             */
-/*   Updated: 2018/01/22 14:33:32 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/24 14:28:48 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ void	normalize_vector(t_point *p)
 	p->z = p->z / len;
 }
 
-void    normalize_reversevector(t_point *p)
+t_point	vector_sub(t_point p1, t_point p2)
 {
-	double  len;
+	t_point	p;
 
-	len = sqrt((p->x * p->x) + (p->y * p->y) + (p->z * p->z));
-	p->x = -p->x / len;
-	p->y = -p->y / len;
-	p->z = -p->z / len;
+	p.x = p1.x - p2.x;
+	p.y = p1.y - p2.y;
+	p.z = p1.z - p2.z;
+	return (p);
 }
 
 double	vec_dist(t_point p1, t_point p2)

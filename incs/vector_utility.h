@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/31 20:17:46 by nboste            #+#    #+#             */
-/*   Updated: 2018/01/22 14:34:19 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/24 14:09:23 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "rtv1.h"
 
-void    normalize_reversevector(t_point *p);
+t_point vector_sub(t_point p1, t_point p2);
 
 void	normalize_vector(t_point *p);
 

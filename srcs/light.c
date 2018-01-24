@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 13:10:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/01/24 13:29:30 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/24 14:07:53 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_color		get_light_color(t_object *object, t_point inter, t_light *light)
 	double	angle;
 
 	light_vector = calc_vector(inter, light->pos);
-	normalize_reversevector(&light_vector.pos);
+	normalize_vector(&light_vector.pos);
 	object->normal_vector = calc_vector(object->pos, inter);
 	normalize_vector(&object->normal_vector.pos);
 	angle = get_angle(light_vector.pos, object->normal_vector.pos);
