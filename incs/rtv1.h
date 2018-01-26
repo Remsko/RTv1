@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 18:32:17 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/26 17:55:17 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/26 18:08:09 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "libft.h"
 # include "event.h"
 # include "types.h"
-# include "norm_obj.h"
 
 # define W_WIDTH 900
 # define W_HEIGHT 900

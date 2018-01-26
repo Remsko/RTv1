@@ -6,7 +6,7 @@
 #    By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/24 11:54:00 by rpinoit           #+#    #+#              #
-#    Updated: 2018/01/26 17:53:25 by rpinoit          ###   ########.fr        #
+#    Updated: 2018/01/26 18:09:23 by rpinoit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,6 @@ SRC = srcs/main.c \
 	  srcs/light_utils.c \
 	  srcs/math_utilities.c \
 	  srcs/pixel.c \
-	  srcs/norm_obj.c
 
 OBJ = $(SRC:%.c=%.o)
 

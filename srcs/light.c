@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 13:10:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/01/26 17:58:39 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/26 18:13:50 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "vector_utilities.h"
 #include "intersection.h"
 #include "math_utilities.h"
-#include "norm_obj.h"
 
 t_color		process_light(t_light *lst_light, t_object *lst_obj, t_object *obj_ptr, t_point inter)
 {
@@ -33,8 +32,8 @@ t_color		process_light(t_light *lst_light, t_object *lst_obj, t_object *obj_ptr,
 	{
 		while (lst_obj != NULL)
 		{
-			if (obj_ptr != lst_obj)
-			{
+	//		if (obj_ptr != lst_obj)
+	//		{
 				light_ray.pos = lst_light->pos;
 				light_ray.dir = vector_sub(inter, light_ray.pos);
 				normalize_vector(&light_ray.dir);
@@ -48,14 +47,14 @@ t_color		process_light(t_light *lst_light, t_object *lst_obj, t_object *obj_ptr,
 						c.b += tmp.c.b;
 					}
 				}
-				else
+	/*			else
 				{
 					tmp.c = get_light_color(obj_ptr, inter, lst_light);
 					c.r += tmp.c.r;
 					c.g += tmp.c.g;
 					c.b += tmp.c.b;
-				}
-			}
+				}*/ 
+	//		}
 			lst_obj = lst_obj->next;
 		}
 		lst_light = lst_light->next;
@@ -69,9 +68,9 @@ t_color		get_light_color(t_object *object, t_point inter, t_light *light)
 	t_color	c;
 	double	angle;
 
-	light_vector = calc_vector(inter, light->pos);
+	light_vector.pos = calc_vector(inter, light->pos);
 	normalize_vector(&light_vector.pos);
-	object->normal_vector.pos = get_normal(&inter, object);
+	object->normal_vector.pos = calc_vector(object->pos, inter);
 	normalize_vector(&object->normal_vector.pos);
 	angle = get_angle(light_vector.pos, object->normal_vector.pos);
 	if (angle <= 0)
@@ -85,12 +84,12 @@ t_color		get_light_color(t_object *object, t_point inter, t_light *light)
 	return (c);
 }
 
-t_ray       calc_vector(t_point a, t_point b)
+t_point       calc_vector(t_point a, t_point b)
 {
-	t_ray ab;
+	t_point pos;
 
-	ab.pos.x = b.x - a.x;
-	ab.pos.y = b.y - a.y;
-	ab.pos.z = b.z - a.z;
-	return (ab);
+	pos.x = b.x - a.x;
+	pos.y = b.y - a.y;
+	pos.z = b.z - a.z;
+	return (pos);
 }
