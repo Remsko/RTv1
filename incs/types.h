@@ -6,13 +6,14 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 18:32:28 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/26 11:19:00 by ada-cunh         ###   ########.fr       */
+/*   Updated: 2018/01/26 18:22:49 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef TYPES_H
 # define TYPES_H
+
+#include "libft.h"
 
 typedef unsigned char	t_uchar;
 
