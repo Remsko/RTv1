@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/30 15:03:57 by nboste            #+#    #+#             */
-/*   Updated: 2018/01/26 13:58:28 by rpinoit          ###   ########.fr       */
+/*   Created: 2018/01/26 12:47:44 by ada-cunh          #+#    #+#             */
+/*   Updated: 2018/01/26 17:40:55 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raytracer.h"
 #include "drawer.h"
 #include <math.h>
-#include "vector_utility.h"
+#include "vector_utilities.h"
 #include "intersection.h"
 #include "error.h"
 #include "light.h"
+#include "pixel.h"
 
 void	raytracer_process(t_env *env)
 {
@@ -56,25 +57,29 @@ t_ray	get_prim_ray(t_2ipair p, t_env *env)
 
 t_color			raytrace(t_ray r, t_env *env)
 {
-	t_object    *obj;
+	t_object    *obj_ptr;
 	t_point     inter;
 	double      dist;
-	t_color     c;
+	t_tmp		tmp;
 
-	c = (t_color){139, 139, 139, 1};
+	tmp.c = (t_color){109 / 255.0, 109 / 255.0, 109 / 255.0, 1};
 	dist = 0xfffff;
-	obj = env->scene.objs;
-	while (obj != NULL)
+	tmp.obj = env->scene.objs;
+	obj_ptr = NULL;
+	while (tmp.obj != NULL)
 	{
-		if (intersection(r, obj, &inter))
+		if (intersection(r, tmp.obj, &inter))
 		{
 			if (vec_dist(inter, r.pos) < dist)
 			{
 				dist = vec_dist(inter, r.pos);
-				c = obj->color;
+				obj_ptr = tmp.obj;
+				tmp.final_inter = inter;
 			}
 		}
-		obj = obj->next;
+		tmp.obj = tmp.obj->next;
 	}
-	return c;
+	if (obj_ptr != NULL)
+		tmp.c = process_light(env->scene.lgts, env->scene.objs, obj_ptr, tmp.final_inter);
+	return (get_final_color(tmp.c));
 }

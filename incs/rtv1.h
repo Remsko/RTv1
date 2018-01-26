@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/30 13:43:07 by nboste            #+#    #+#             */
-/*   Updated: 2018/01/14 17:25:33 by rpinoit          ###   ########.fr       */
+/*   Created: 2018/01/24 18:32:17 by ada-cunh          #+#    #+#             */
+/*   Updated: 2018/01/26 17:55:17 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef RTV1_H
 # define RTV1_H
@@ -17,6 +18,7 @@
 # include "libft.h"
 # include "event.h"
 # include "types.h"
+# include "norm_obj.h"
 
 # define W_WIDTH 900
 # define W_HEIGHT 900

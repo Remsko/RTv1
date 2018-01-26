@@ -3,32 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/24 14:52:08 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/01/24 18:07:59 by rpinoit          ###   ########.fr       */
+/*   Created: 2018/01/24 15:51:28 by ada-cunh          #+#    #+#             */
+/*   Updated: 2018/01/26 14:07:57 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "intersection.h"
-#include "vector_utility.h"
-
-static double	get_delta(double a, double b, double c)
-{
-	return (b * b - 4 * a * c);
-}
-/*
-static double dotProduct(t_point p1, t_point p2)
-{
-	double n1;
-	double n2;
-
-	normalize_vector(&p1);
-	normalize_vector(&p2);
-	n1 = get_norm(p1);
-	n2 = get_norm(p2);
-	return (p1.x * p2.x + p1.y * p2.y + p1.z * p2.z);
-} */
+#include "vector_utilities.h"
+#include "math_utilities.h"
 
 static t_bool   inter_cylinder(t_ray r, t_object *obj, t_point *inter)
 {

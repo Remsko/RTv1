@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 13:10:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/01/26 17:58:39 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/26 17:48:38 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "vector_utilities.h"
 #include "intersection.h"
 #include "math_utilities.h"
-#include "norm_obj.h"
+#include "obj_normal.h"
 
 t_color		process_light(t_light *lst_light, t_object *lst_obj, t_object *obj_ptr, t_point inter)
 {

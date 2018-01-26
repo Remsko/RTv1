@@ -1,18 +1,20 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/30 13:44:47 by nboste            #+#    #+#             */
-/*   Updated: 2018/01/11 14:12:54 by ada-cunh         ###   ########.fr       */
+/*   Created: 2018/01/24 18:32:28 by ada-cunh          #+#    #+#             */
+/*   Updated: 2018/01/26 17:54:41 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #ifndef TYPES_H
 # define TYPES_H
+
+#include "rtv1.h"
 
 typedef unsigned char	t_uchar;
 
@@ -134,6 +136,12 @@ typedef struct          s_object
       
     struct s_object *next;
 }                       t_object;
+
+typedef struct			s_intersection
+{
+	t_object	*obj;
+	t_point		pos;
+}						t_intersection;
 
 typedef struct          s_tmp
 {
