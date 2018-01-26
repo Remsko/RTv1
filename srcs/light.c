@@ -6,12 +6,12 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 13:10:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/01/24 14:07:53 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/26 11:04:42 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "light.h"
-#include "vector_utility.h"
+#include "vector_utilities.h"
 #include "intersection.h"
 
 t_color		get_light_color(t_object *object, t_point inter, t_light *light)
@@ -35,14 +35,4 @@ t_color		get_light_color(t_object *object, t_point inter, t_light *light)
 		printf("color = %f\n", c.r);
 	}
 	return (c);
-}
-
-t_ray       calc_vector(t_point a, t_point b)
-{
-	t_ray ab;
-
-	ab.pos.x = b.x - a.x;
-	ab.pos.y = b.y - a.y;
-	ab.pos.z = b.z - a.z;
-	return (ab);
 }

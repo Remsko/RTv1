@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_utility.c                                   :+:      :+:    :+:   */
+/*   vector_utilities.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/24 14:51:45 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/24 16:03:19 by ada-cunh         ###   ########.fr       */
+/*   Created: 2018/01/26 10:30:57 by ada-cunh          #+#    #+#             */
+/*   Updated: 2018/01/26 10:30:57 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector_utility.h"
+#include "vector_utilities.h"
 #include <math.h>
 
 // Commented by ada-cunh: On garde le vecteur 1:1 pour avoir la direction

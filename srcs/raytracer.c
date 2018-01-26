@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   raytracer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/30 15:03:57 by nboste            #+#    #+#             */
-/*   Updated: 2018/01/24 14:41:43 by rpinoit          ###   ########.fr       */
+/*   Created: 2018/01/26 12:47:44 by ada-cunh          #+#    #+#             */
+/*   Updated: 2018/01/26 12:47:52 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raytracer.h"
 #include "drawer.h"
 #include <math.h>
-#include "vector_utility.h"
+#include "vector_utilities.h"
 #include "intersection.h"
 #include "error.h"
 #include "light.h"

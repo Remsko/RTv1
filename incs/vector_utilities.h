@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_utility.h                                   :+:      :+:    :+:   */
+/*   vector_utilities.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/24 18:28:33 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/24 18:28:35 by ada-cunh         ###   ########.fr       */
+/*   Created: 2018/01/26 10:26:47 by ada-cunh          #+#    #+#             */
+/*   Updated: 2018/01/26 10:26:57 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTOR_UTILITY_H
-# define VECTOR_UTILITY_H
+#ifndef VECTOR_UTILITIES_H
+# define VECTOR_UTILITIES_H
 
 #include "rtv1.h"
 

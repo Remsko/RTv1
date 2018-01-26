@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 18:32:28 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/24 18:32:29 by ada-cunh         ###   ########.fr       */
+/*   Updated: 2018/01/26 11:19:00 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,12 @@ typedef struct          s_object
       
     struct s_object *next;
 }                       t_object;
+
+typedef struct			s_intersection
+{
+	t_object	*obj;
+	t_point		pos;
+}						t_intersection;
 
 typedef struct          s_tmp
 {
