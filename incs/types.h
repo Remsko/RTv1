@@ -126,11 +126,10 @@ typedef struct          s_object
 
     // CYLINDER
     //double        radius;
-    t_point         axis;
+	t_point			axis;
 
 	//CONE
-	//double		alpha;
-	//t_point		axis;
+	//double		radius;
 	t_ray			normal_vector;
       
     struct s_object *next;

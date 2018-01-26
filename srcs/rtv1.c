@@ -6,14 +6,13 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/14 21:40:50 by nboste            #+#    #+#             */
-/*   Updated: 2018/01/24 10:25:49 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/24 17:43:33 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "drawer.h"
 #include "error.h"
-#include "camera.h"
 #include "raytracer.h"
 #include "parser.h"
 
