@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 13:10:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/01/29 19:06:54 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/29 20:15:55 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,37 @@ void		add_diffuse_light(t_color *c, t_object *obj, t_light *light, double cos)
 	c->b += cos * (obj->mater.diffuse.b / 255.0) * (light->color.b / 255.0);
 }
 
-t_color		process_light(t_light *lst_light, t_object *lst_obj, t_intersection *inter)
+t_point		get_multiply_by_2cos_angle(t_point normal, double cos_angle)
+{
+	t_point ret;
+
+	ret.x = 2.0 * normal.x * cos_angle;
+	ret.y = 2.0 * normal.y * cos_angle;
+	ret.z = 2.0 * normal.z * cos_angle;
+	return (ret);	
+}
+void		add_specular_light(t_color *c, t_point normal, t_point r_pos, t_point inter_pos, t_point light_vector, double cos_angle, t_object *obj)
+{
+	t_point refra;
+	t_point vision;
+	double	alpha;
+
+	alpha = 50;
+	normal = get_multiply_by_2cos_angle(normal, cos_angle);
+	normalize_vector(&normal);
+	refra = vector_sub(normal, light_vector);
+	normalize_vector(&refra);
+	vision = vector_sub(r_pos, inter_pos);
+	normalize_vector(&vision);
+	if (cos_omega > 0)
+	{
+		c->r += pow(cos_omega, alpha) * (obj->mater.specular.r / 255.0);
+		c->g += pow(cos_omega, alpha) * (obj->mater.specular.g / 255.0);
+		c->b += pow(cos_omega, alpha) * (obj->mater.specular.b / 255.0);
+	}
+}
+
+t_color		process_light(t_light *lst_light, t_object *lst_obj, t_intersection *inter, t_ray r)
 {
 	t_color c;
 	t_color ambient;
@@ -74,6 +104,7 @@ t_color		process_light(t_light *lst_light, t_object *lst_obj, t_intersection *in
 			cos_angle = get_cos(normal, light_vector);
 			if (cos_angle > 0)
 				add_diffuse_light(&c, inter->obj, lst_light, cos_angle);
+			add_specular_light(&c, normal, r.pos, inter->pos, light_vector, cos_angle, inter->obj);
 		}
 		lst_light = lst_light->next;
 	}
