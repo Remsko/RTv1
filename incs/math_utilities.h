@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 10:26:21 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/26 10:26:25 by ada-cunh         ###   ########.fr       */
+/*   Updated: 2018/01/29 10:07:24 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ double	dot_product(t_point p1, t_point p2);
 
 t_point	cross_product(t_point a, t_point b);
 
+double  solve_equation(t_point poly, double *t);
 
 #endif

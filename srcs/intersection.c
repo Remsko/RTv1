@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 15:51:28 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/26 14:07:57 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/29 11:09:29 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,155 +14,97 @@
 #include "vector_utilities.h"
 #include "math_utilities.h"
 
-static t_bool   inter_cylinder(t_ray r, t_object *obj, t_point *inter)
+double   inter_cylinder(t_ray r, t_object *obj, double *t)
 {
 	t_point pos;
 	t_point dir;
 	t_point poly;
-	double  delta;
 
 	dir = r.dir;
 	pos = vector_sub(r.pos, obj->pos);
-	poly.x = (dir.x * dir.x + dir.y * dir.y);
-	poly.y = 2 * dir.x * pos.x + 2 * dir.y * pos.y;
-	poly.z = pow(pos.x, 2) + pow(pos.y, 2) - pow(obj->radius, 2);
-	delta = get_delta(poly.x, poly.y, poly.z);
-	if (delta < 0)
-		return (0);
-	else
-	{
-		inter->x = (-poly.y + sqrt(delta)) / (2 * poly.x);
-		inter->y = (-poly.y - sqrt(delta)) / (2 * poly.x);
-		if (inter->x < inter->y)
-		{
-			inter->y = r.pos.y + r.dir.y * inter->x;
-			inter->z = r.pos.z + r.dir.z * inter->x;
-			inter->x = r.pos.x + r.dir.x * inter->x;
-		}
-		else
-		{
-			inter->x = r.pos.x + r.dir.x * inter->y;
-			inter->z = r.pos.z + r.dir.z * inter->y;
-			inter->y = r.pos.y + r.dir.y * inter->y;
-		}
-		return (1);
-	}
+	poly.x = dir.x * dir.x + dir.y * dir.y;
+	poly.y = dir.x * pos.x + dir.y * pos.y;
+	poly.y *= 2;
+	poly.z = pos.x * pos.x + pos.y * pos.y - obj->radius * obj->radius;
+	return (solve_equation(poly, t));
 }
 
-static t_bool          inter_cone(t_ray r, t_object *obj, t_point *inter)
+double          inter_cone(t_ray r, t_object *obj, double *t)
 {
 	t_point pos;
 	t_point dir;
 	t_point poly;
-	double  delta;
 	double	radius;
 
 	dir = r.dir;
 	pos = vector_sub(r.pos, obj->pos);
 	radius = sin(ft_degtorad(obj->radius)) * sin(ft_degtorad(obj->radius));
-	poly.x = (dir.x * dir.x) + (dir.y * dir.y) - (dir.z * dir.z * radius);
-	poly.y = 2 * ((dir.x * pos.x) + (dir.y * pos.y) - (radius * dir.z * pos.z));
-	poly.z = pow(pos.x, 2) + pow(pos.y, 2) - pow(pos.z, 2) * radius;
-	delta = get_delta(poly.x, poly.y, poly.z);
-	if (delta < 0)
-		return (0);
-	else
-	{
-		inter->x = (-poly.y + sqrt(delta)) / (2 * poly.x);
-		inter->y = (-poly.y - sqrt(delta)) / (2 * poly.x);
-		if (inter->x < inter->y)
-		{
-			inter->y = r.pos.y + r.dir.y * inter->x;
-			inter->z = r.pos.z + r.dir.z * inter->x;
-			inter->x = r.pos.x + r.dir.x * inter->x;
-		}
-		else
-		{
-			inter->x = r.pos.x + r.dir.x * inter->y;
-			inter->z = r.pos.z + r.dir.z * inter->y;
-			inter->y = r.pos.y + r.dir.y * inter->y;
-		}
-		return (1);
-	}
+	poly.x = dir.x * dir.x + dir.y * dir.y - dir.z * dir.z * radius;
+	poly.y = dir.x * pos.x + dir.y * pos.y - dir.z * pos.z * radius;
+	poly.y *= 2;
+	poly.z = pos.x * pos.x + pos.y * pos.y - pos.z * pos.z * radius;
+	return (solve_equation(poly, t));
 }
 
-static t_bool	inter_sphere(t_ray r, t_object *obj, t_point *inter)
+double	inter_sphere(t_ray r, t_object *obj, double *t)
 {
 	t_point		dir;
 	t_point		pos;
-	t_point		opos;
 	t_point		poly;
-	double		delta;
 
 	dir = r.dir;
-	pos = r.pos;
-	opos = obj->pos;
-	poly.x = (dir.x * dir.x + dir.y * dir.y + dir.z * dir.z);
-	poly.y = 2 * (dir.x * (pos.x - opos.x) + dir.y * (pos.y - opos.y) + dir.z * (pos.z - opos.z));
-	poly.z = (pow(pos.x + opos.x, 2) + pow(pos.y - opos.y, 2) + pow(pos.z - opos.z, 2) - (obj->radius * obj->radius));
-	delta = get_delta(poly.x, poly.y, poly.z);
-	if (delta < 0)
-		return (0);
-	else
-	{
-		inter->x = (-poly.y + sqrt(delta)) / (2 * poly.x);
-		inter->y = (-poly.y - sqrt(delta)) / (2 * poly.x);
-		if (inter->x < inter->y)
-		{
-			inter->y = r.pos.y + r.dir.y * inter->x;
-			inter->z = r.pos.z + r.dir.z * inter->x;
-			inter->x = r.pos.x + r.dir.x * inter->x;
-		}
-		else
-		{
-			inter->x = r.pos.x + r.dir.x * inter->y;
-			inter->z = r.pos.z + r.dir.z * inter->y;
-			inter->y = r.pos.y + r.dir.y * inter->y;
-		}
-		return (1);
-	}
+	pos = vector_sub(r.pos, obj->pos);
+	poly.x = dir.x * dir.x + dir.y * dir.y + dir.z * dir.z;
+	poly.y = dir.x * pos.x + dir.y * pos.y + dir.z * pos.z;
+	poly.y *= 2;
+	poly.z = pos.x * pos.x + pos.y * pos.y + pos.z * pos.z;
+	poly.z -= obj->radius * obj->radius;
+	return (solve_equation(poly, t));
 }
 
-static t_bool	inter_plan(t_ray r, t_object *obj, t_point *inter)
+double	inter_plane(t_ray r, t_object *obj, double *t)
 {
-	t_point	n;
-	t_point	l;
-	double	m;
-	double	t;
+	double	n;
 	double	d;
-	t_point pos;
+	t_point	dir;
+	t_point	pos;
+	t_point normal;
 
-	n = obj->normal;
-	normalize_vector(&n);
-	m = vector_multiply(n, r.dir);
-	if (fabs(m) < 0.000001)
-		return (0);
-	l = vector_sub(r.pos, obj->pos);
-	d = vector_multiply(n, l);
-	t = -d / m;
-	pos = vector_add(r.pos, vector_mul(r.dir, t));
-	if (t <= 0.000001)
-		return (0);
-	else
-	{
-		inter->x = r.pos.x + t * r.dir.x;
-		inter->y = r.pos.y + t * r.dir.y;
-		inter->z = r.pos.z + t * r.dir.z;
-		return (1);
-	}
-	return (0);
+	dir = r.dir;
+	pos = vector_sub(obj->pos, r.pos);
+	normal = obj->normal;
+	n = normal.x * pos.x + normal.y * pos.y + normal.z * pos.z;
+	d = normal.x * dir.x + normal.y * dir.y + normal.z * dir.z;
+	return (*t = n / d > 0 ? n / d : 0xffff);
 }
 
-t_bool			intersection(t_ray r, t_object *obj, t_point *inter)
+t_bool	intersection(t_ray r, t_object *obj, t_intersection *inter)
 {
-	if (obj->type == sphere)
-		return (inter_sphere(r, obj, inter));
-	else if (obj->type == plan)
-		return (inter_plan(r, obj, inter));
-	else if (obj->type == cylinder)
-		return (inter_cylinder(r, obj, inter));
-	else if (obj->type == cone)
-		return (inter_cone(r, obj, inter));
-	else
-		return (0);
+	double t;
+	t_bool ret;
+
+	t = inter->t;
+	ret = 0;
+	while (obj != NULL)
+	{
+		if (obj->type == sphere)
+			t = inter_sphere(r, obj, &t);
+		else if (obj->type == plan)
+			t = inter_plane(r, obj, &t);
+		else if (obj->type == cylinder)
+			t = inter_cylinder(r, obj, &t);
+		else if (obj->type == cone)
+			t = inter_cone(r, obj, &t);
+		if (t < inter->t && t > 0.000001)
+		{
+			inter->obj = obj;
+			inter->t = t;
+			inter->pos.x = r.pos.x + r.dir.x * inter->t;
+			inter->pos.y = r.pos.y + r.dir.y * inter->t;
+			inter->pos.z = r.pos.z + r.dir.z * inter->t;
+			ret = 1;
+		}
+		obj = obj->next;
+	}
+	return (ret);
 }

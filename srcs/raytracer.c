@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:47:44 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/26 17:40:55 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/29 09:37:25 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,29 +57,24 @@ t_ray	get_prim_ray(t_2ipair p, t_env *env)
 
 t_color			raytrace(t_ray r, t_env *env)
 {
-	t_object    *obj_ptr;
-	t_point     inter;
-	double      dist;
+	t_intersection     inter;
 	t_tmp		tmp;
 
-	tmp.c = (t_color){109 / 255.0, 109 / 255.0, 109 / 255.0, 1};
-	dist = 0xfffff;
+	tmp.c = (t_color){109, 109, 109, 1};
 	tmp.obj = env->scene.objs;
-	obj_ptr = NULL;
-	while (tmp.obj != NULL)
+	inter.t = 0xfffff;
+	if (intersection(r, tmp.obj, &inter))
 	{
-		if (intersection(r, tmp.obj, &inter))
-		{
-			if (vec_dist(inter, r.pos) < dist)
-			{
-				dist = vec_dist(inter, r.pos);
-				obj_ptr = tmp.obj;
-				tmp.final_inter = inter;
-			}
-		}
-		tmp.obj = tmp.obj->next;
+//		if (inter.obj->type == sphere)
+//			printf("sphere\n");
+//		if (inter.obj->type == cone)
+//			printf("cone\n");
+//		if (inter.obj->type == cylinder)
+//			printf("cylindre\n");
+//		if (inter.obj->type == plan)
+//			printf("plan\n");
+		tmp.c = inter.obj->color;
 	}
-	if (obj_ptr != NULL)
-		tmp.c = process_light(env->scene.lgts, env->scene.objs, obj_ptr, tmp.final_inter);
-	return (get_final_color(tmp.c));
+//	return (get_final_color(tmp.c));
+	return (tmp.c);
 }
