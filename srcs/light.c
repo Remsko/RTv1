@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 13:10:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/01/29 17:17:44 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/29 19:06:54 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,7 @@ t_color		process_light(t_light *lst_light, t_object *lst_obj, t_intersection *in
 			normalize_vector(&light_vector);
 			cos_angle = get_cos(normal, light_vector);
 			if (cos_angle > 0)
-			{
 				add_diffuse_light(&c, inter->obj, lst_light, cos_angle);
-			}
 		}
 		lst_light = lst_light->next;
 	}
