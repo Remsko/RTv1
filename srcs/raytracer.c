@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:47:44 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/29 09:37:25 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/29 11:29:55 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_color			raytrace(t_ray r, t_env *env)
 
 	tmp.c = (t_color){109, 109, 109, 1};
 	tmp.obj = env->scene.objs;
-	inter.t = 0xfffff;
+	inter.t = MAX_RAY_LENGTH;
 	if (intersection(r, tmp.obj, &inter))
 	{
 //		if (inter.obj->type == sphere)

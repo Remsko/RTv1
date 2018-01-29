@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 15:51:28 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/29 11:09:29 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/29 11:30:44 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ double	inter_plane(t_ray r, t_object *obj, double *t)
 	normal = obj->normal;
 	n = normal.x * pos.x + normal.y * pos.y + normal.z * pos.z;
 	d = normal.x * dir.x + normal.y * dir.y + normal.z * dir.z;
-	return (*t = n / d > 0 ? n / d : 0xffff);
+	return (*t = n / d > 0 ? n / d : MAX_RAY_LENGTH);
 }
 
 t_bool	intersection(t_ray r, t_object *obj, t_intersection *inter)
@@ -83,7 +83,7 @@ t_bool	intersection(t_ray r, t_object *obj, t_intersection *inter)
 	double t;
 	t_bool ret;
 
-	t = inter->t;
+	t = MAX_RAY_LENGTH;
 	ret = 0;
 	while (obj != NULL)
 	{
