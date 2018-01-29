@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 13:10:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/01/29 15:55:51 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/29 17:17:44 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,21 @@ int				no_object_obstructing_light(t_light *light, t_intersection *inter, t_obje
 	t_ray			light_ray;
 	double			light_distance;
 
+	new_inter.t = MAX_RAY_LENGTH;
 	light_ray.pos = inter->pos;
 	light_ray.dir = vector_sub(light->pos, inter->pos);
 	light_distance = vector_norm(light_ray.dir);
 	intersection(light_ray, lst_obj, &new_inter);
-	return (new_inter.t <= light_distance ? 0 : 1);
+	if (new_inter.t <= light_distance)
+		return (0);
+	return (1);
 }
 
 void		add_diffuse_light(t_color *c, t_object *obj, t_light *light, double cos)
 {
-	c->r += cos * (obj->color.r / 255.0) * (obj->mater.diffuse.r / 255.0) * (light->color.r / 255.0);
-	c->g += cos * (obj->color.g / 255.0) * (obj->mater.diffuse.g / 255.0) * (light->color.g / 255.0);
-	c->b += cos * (obj->color.b / 255.0) * (obj->mater.diffuse.b / 255.0) * (light->color.b / 255.0);
+	c->r += cos * (obj->mater.diffuse.r / 255.0) * (light->color.r / 255.0);
+	c->g += cos * (obj->mater.diffuse.g / 255.0) * (light->color.g / 255.0);
+	c->b += cos * (obj->mater.diffuse.b / 255.0) * (light->color.b / 255.0);
 }
 
 t_color		process_light(t_light *lst_light, t_object *lst_obj, t_intersection *inter)
@@ -55,12 +58,13 @@ t_color		process_light(t_light *lst_light, t_object *lst_obj, t_intersection *in
 	double	cos_angle;
 
 	// c = ambient_light();
-	ambient = (t_color){0.2, 0.2, 0.2, 1};
+	ambient = (t_color){0.1, 0.1, 0.1, 1};
 	c = (t_color){ambient.r * (inter->obj->color.r / 255.0),
 		ambient.g * (inter->obj->color.g / 255.0),
 		ambient.b * (inter->obj->color.b / 255.0), 1};
 	normal = (t_point){0, 0, 0};
 	normal = get_normal(normal, inter);
+	normalize_vector(&normal);
 	while (lst_light)
 	{
 		if (no_object_obstructing_light(lst_light, inter, lst_obj))
@@ -69,7 +73,9 @@ t_color		process_light(t_light *lst_light, t_object *lst_obj, t_intersection *in
 			normalize_vector(&light_vector);
 			cos_angle = get_cos(normal, light_vector);
 			if (cos_angle > 0)
+			{
 				add_diffuse_light(&c, inter->obj, lst_light, cos_angle);
+			}
 		}
 		lst_light = lst_light->next;
 	}

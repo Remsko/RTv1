@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:47:44 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/29 13:28:57 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/29 17:35:30 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ t_color			raytrace(t_ray r, t_env *env)
 	t_intersection     inter;
 	t_tmp		tmp;
 
-	tmp.c = (t_color){109 / 255.0, 109 / 255.0, 109 / 255.0, 1};
+//	tmp.c = (t_color){109 / 255.0, 109 / 255.0, 109 / 255.0, 1};
+	tmp.c = (t_color){0, 0, 0, 1};
 	tmp.obj = env->scene.objs;
 	tmp.light = env->scene.lgts;
 	inter.t = MAX_RAY_LENGTH;
@@ -74,8 +75,8 @@ t_color			raytrace(t_ray r, t_env *env)
 //			printf("cylindre\n");
 //		if (inter.obj->type == plan)
 //			printf("plan\n");
-		tmp.c = process_light(tmp.light, tmp.obj, &inter);
+		tmp.c = process_light(tmp.light, env->scene.objs, &inter);
+		get_final_color(&tmp.c);
 	}
-	return (get_final_color(tmp.c));
-//	return (tmp.c);
+	return (tmp.c);
 }
