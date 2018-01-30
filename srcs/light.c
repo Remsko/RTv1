@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 13:10:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/01/30 12:53:56 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/30 14:33:31 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int				no_object_obstructing_light(t_light *light, t_intersection *inter, t_obje
 	new_inter.t = MAX_RAY_LENGTH;
 	light_ray.pos = inter->pos;
 	light_ray.dir = vector_sub(light->pos, inter->pos);
+	normalize_vector(&light_ray.dir);
 	light_distance = vector_norm(light_ray.dir);
 	intersection(light_ray, lst_obj, &new_inter);
 	if (new_inter.t < light_distance)
@@ -66,7 +67,7 @@ void		add_specular_light(t_color *c, t_point normal, t_point r_pos, t_point inte
 	t_point	tmp;
 	double light_intensity;
 
-    light_intensity = 0.5;
+    light_intensity = 1.0;
 	(void)cos_angle;
 	alpha = 50;
 	tmp.x = 2 * dot_production(normal, light_vector) * normal.x;
@@ -96,7 +97,7 @@ t_color		process_light(t_light *lst_light, t_object *lst_obj, t_intersection *in
 
 	(void)r;
 	// c = ambient_light();
-	ambient = (t_color){0.0, 0.0, 0.0, 1};
+	ambient = (t_color){0.1, 0.1, 0.1, 1};
 	c = (t_color){ambient.r * (inter->obj->color.r / 255.0),
 		ambient.g * (inter->obj->color.g / 255.0),
 		ambient.b * (inter->obj->color.b / 255.0), 1};

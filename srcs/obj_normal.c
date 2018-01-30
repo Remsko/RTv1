@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:26:06 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/01/30 13:47:04 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/30 14:23:26 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,19 @@ void	get_sphere_normal(t_point *normal, t_intersection *inter)
 
 void	get_plane_normal(t_point *normal, t_intersection *inter)
 {
-	*normal = vector_sub(inter->pos, inter->obj->pos);
-//	*normal = inter->obj->normal;
+	*normal = inter->obj->normal;
 }
 
 void	get_cylinder_normal(t_point *normal, t_intersection *inter)
 {
 	*normal = vector_sub(inter->pos, inter->obj->pos);
+	normal->z = 0;
 }
 
 void	get_cone_normal(t_point *normal, t_intersection *inter)
 {
 	*normal = vector_sub(inter->pos, inter->obj->pos);
+	normal->z *= -1;
 }
 
 t_point		get_normal(t_point normal, t_intersection *inter)
@@ -42,7 +43,10 @@ t_point		get_normal(t_point normal, t_intersection *inter)
 	if (obj->type == sphere)
 		get_sphere_normal(&normal, inter);
 	else if (obj->type == plan)
+	{
 		get_plane_normal(&normal, inter);
+		return (normal = obj->normal);
+	}
 	else if (obj->type == cylinder)
 		get_cylinder_normal(&normal, inter);
 	else if (obj->type == cone)
