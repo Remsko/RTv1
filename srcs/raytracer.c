@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:47:44 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/29 19:56:22 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/30 12:47:47 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_color			raytrace(t_ray r, t_env *env)
 	t_tmp		tmp;
 
 //	tmp.c = (t_color){109 / 255.0, 109 / 255.0, 109 / 255.0, 1};
-	tmp.c = (t_color){0, 0, 0, 1};
+	tmp.c = (t_color){109, 109, 109, 1};
 	tmp.obj = env->scene.objs;
 	tmp.light = env->scene.lgts;
 	inter.t = MAX_RAY_LENGTH;
