@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 13:10:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/01/30 16:56:27 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/31 10:28:21 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int				no_object_obstructing_light(t_light *light, t_intersection *inter, t_obje
 	light_ray.pos = inter->pos;
 	light_ray.dir = vector_sub(light->pos, inter->pos);
 //	light_ray.dir = vector_sub(inter->pos, light->pos);
-//	normalize_vector(&light_ray.dir);
 	light_distance = vector_norm(light_ray.dir);
+	normalize_vector(&light_ray.dir);
 	intersection(light_ray, lst_obj, &new_inter);
 	if (new_inter.t > light_distance)
 		return (1);
