@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 13:10:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/01/31 10:28:21 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/31 13:26:48 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int				no_object_obstructing_light(t_light *light, t_intersection *inter, t_obje
 	new_inter.t = MAX_RAY_LENGTH;
 	light_ray.pos = inter->pos;
 	light_ray.dir = vector_sub(light->pos, inter->pos);
-//	light_ray.dir = vector_sub(inter->pos, light->pos);
+	//	light_ray.dir = vector_sub(inter->pos, light->pos);
 	light_distance = vector_norm(light_ray.dir);
 	normalize_vector(&light_ray.dir);
 	intersection(light_ray, lst_obj, &new_inter);
@@ -53,7 +53,7 @@ void		add_diffuse_light(t_color *c, t_object *obj, t_light *light, double cos)
 {
 	t_color light_intensity;
 
-	light_intensity = (t_color){0.8, 0.8, 0.8, 1};
+	light_intensity = (t_color){0.5, 0.5, 0.5, 1};
 	c->r += cos * fmax(0, (obj->mater.diffuse.r / 255.0) * (light->color.r / 255.0) * (obj->color.r / 255.0) * light_intensity.r);
 	c->g += cos * fmax(0, (obj->mater.diffuse.g / 255.0) * (light->color.g / 255.0) * (obj->color.g / 255.0) * light_intensity.g);
 	c->b += cos * fmax(0, (obj->mater.diffuse.b / 255.0) * (light->color.b / 255.0) * (obj->color.b / 255.0) * light_intensity.b);
@@ -68,13 +68,13 @@ void		add_specular_light(t_color *c, t_point normal, t_point r_pos, t_point inte
 	t_point	tmp;
 	double light_intensity;
 
-    light_intensity = 0.7;
+	light_intensity = 0.8;
 	(void)cos_angle;
-	alpha = 100;
-	tmp.x = 2 * dot_production(normal, light_vector) * normal.x;
-	tmp.y = 2 * dot_production(normal, light_vector) * normal.y;
-	tmp.z = 2 * dot_production(normal, light_vector) * normal.z;
-//	normalize_vector(&tmp);
+	alpha = 100.0;
+	tmp.x = 2.0 * dot_production(normal, light_vector) * normal.x;
+	tmp.y = 2.0 * dot_production(normal, light_vector) * normal.y;
+	tmp.z = 2.0 * dot_production(normal, light_vector) * normal.z;
+	//	normalize_vector(&tmp);
 	refra = vector_sub(tmp, light_vector);
 	normalize_vector(&refra);
 	vision = vector_sub(r_pos, inter_pos);
@@ -96,13 +96,15 @@ t_color		process_light(t_light *lst_light, t_object *lst_obj, t_intersection *in
 	t_point	light_vector;
 	double	cos_angle;
 
-	(void)r;
+	inter->pos.x = r.pos.x + r.dir.x * inter->t;
+	inter->pos.y = r.pos.y + r.dir.y * inter->t;
+	inter->pos.z = r.pos.z + r.dir.z * inter->t;
 	// c = ambient_light();
-	ambient = (t_color){0.3, 0.3, 0.3, 1};
+	ambient = (t_color){0.5, 0.5, 0.5, 1};
 	c = (t_color){ambient.r * (inter->obj->color.r / 255.0),
 		ambient.g * (inter->obj->color.g / 255.0),
 		ambient.b * (inter->obj->color.b / 255.0), 1};
-	normal = (t_point){0, 0, 0};
+	normal = (t_point){0.0, 0.0, 0.0};
 	normal = get_normal(normal, inter);
 	normalize_vector(&normal);
 	while (lst_light)
@@ -112,7 +114,7 @@ t_color		process_light(t_light *lst_light, t_object *lst_obj, t_intersection *in
 			light_vector = vector_sub(lst_light->pos, inter->pos);
 			normalize_vector(&light_vector);
 			cos_angle = dot_production(normal, light_vector);
-			if (cos_angle >= 0)
+			if (cos_angle >= 0.000001)
 				add_diffuse_light(&c, inter->obj, lst_light, cos_angle);
 			add_specular_light(&c, normal, r.pos, inter->pos, light_vector, cos_angle, inter->obj);
 		}

@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 10:32:34 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/30 12:51:16 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/31 13:50:08 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,17 @@ double	solve_equation(t_point poly, double *t)
 		return (*t = MAX_RAY_LENGTH);
 	x1 = (-poly.y + sqrt(delta)) / (2.0 * poly.x);
 	x2 = (-poly.y - sqrt(delta)) / (2.0 * poly.x);
-	if (x1 < x2)
-		*t = x1;
+	if (x1 < x2 && x1 > 0.0)
+		return (*t = x1);
 	else
-		*t = x2;
-	return (*t);
+		if (x2 > 0.0)
+			return (*t = x2);
+	return (*t = MAX_RAY_LENGTH);
 }
 
 double	get_delta(double a, double b, double c)
 {
-	return (b * b - 4 * a * c);
+	return (b * b - 4.0 * a * c);
 }
 
 double	dot_product(t_point p1, t_point p2)
