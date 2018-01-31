@@ -6,18 +6,17 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 18:32:17 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/31 14:00:41 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/31 17:46:24 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef RTV1_H
 # define RTV1_H
 
 # include "SDL.h"
 # include "libft.h"
-# include "event.h"
 # include "types.h"
+# include "event.h"
 
 # define W_WIDTH 900
 # define W_HEIGHT 900
@@ -64,5 +63,18 @@ void					init(t_env *env);
 void					process(t_env *env);
 
 void					destroy(t_env *env);
+
+# include "camera.h"
+# include "light.h"
+# include "raytracer.h"
+# include "drawer.h"
+# include "math_utilities.h"
+# include "error.h"
+# include "obj_normal.h"
+# include "event.h"
+# include "parser.h"
+# include "vector_utilities.h"
+# include "intersection.h"
+# include "pixel.h"
 
 #endif

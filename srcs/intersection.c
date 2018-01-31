@@ -6,15 +6,13 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 15:51:28 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/31 13:50:49 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/31 18:32:51 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "intersection.h"
-#include "vector_utilities.h"
-#include "math_utilities.h"
+#include "rtv1.h"
 
-double   inter_cylinder(t_ray r, t_object *obj, double *t)
+void   inter_cylinder(t_ray r, t_object *obj, double *t)
 {
 	t_point pos;
 	t_point dir;
@@ -29,7 +27,7 @@ double   inter_cylinder(t_ray r, t_object *obj, double *t)
 	return (solve_equation(poly, t));
 }
 
-double          inter_cone(t_ray r, t_object *obj, double *t)
+void          inter_cone(t_ray r, t_object *obj, double *t)
 {
 	t_point pos;
 	t_point dir;
@@ -46,7 +44,7 @@ double          inter_cone(t_ray r, t_object *obj, double *t)
 	return (solve_equation(poly, t));
 }
 
-double	inter_sphere(t_ray r, t_object *obj, double *t)
+void	inter_sphere(t_ray r, t_object *obj, double *t)
 {
 	t_point		dir;
 	t_point		pos;
@@ -62,7 +60,7 @@ double	inter_sphere(t_ray r, t_object *obj, double *t)
 	return (solve_equation(poly, t));
 }
 
-double	inter_plane(t_ray r, t_object *obj, double *t)
+void	inter_plane(t_ray r, t_object *obj, double *t)
 {
 	double	n;
 	double	d;
@@ -75,7 +73,7 @@ double	inter_plane(t_ray r, t_object *obj, double *t)
 	normal = obj->normal;
 	n = normal.x * pos.x + normal.y * pos.y + normal.z * pos.z;
 	d = normal.x * dir.x + normal.y * dir.y + normal.z * dir.z;
-	return (*t = -n / d > 0.000001 ? -n / d : MAX_RAY_LENGTH);
+	*t = -n / d > 0.000001 ? -n / d : MAX_RAY_LENGTH;
 }
 
 t_bool	intersection(t_ray r, t_object *obj, t_intersection *inter)
@@ -97,7 +95,7 @@ t_bool	intersection(t_ray r, t_object *obj, t_intersection *inter)
 			inter_cone(r, obj, &t);
 		if (t < inter->t && t > 0.000001)
 		{
-			inter->obj = obj;
+			inter->obj = *obj;
 			inter->t = t;
 			ret = 1;
 		}

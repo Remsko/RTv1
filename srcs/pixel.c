@@ -6,14 +6,11 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:24:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/01/29 18:48:07 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/31 18:08:03 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pixel.h"
 #include "rtv1.h"
-#include "math.h"
-#include "types.h"
 
 void		get_final_color(t_color *c)
 {

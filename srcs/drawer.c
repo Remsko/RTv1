@@ -6,13 +6,11 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:46:34 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/31 14:00:11 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/31 17:25:56 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "drawer.h"
-#include "error.h"
-#include <stdio.h>
+#include "rtv1.h"
 
 static t_uint32	t_colortouint32(t_color c)
 {

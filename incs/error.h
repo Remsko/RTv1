@@ -6,12 +6,14 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 18:31:22 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/24 18:31:24 by ada-cunh         ###   ########.fr       */
+/*   Updated: 2018/01/31 17:37:10 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERROR_H
 # define ERROR_H
+
+# include "rtv1.h"
 
 void	ft_exit(char *msg);
 

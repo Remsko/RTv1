@@ -6,15 +6,11 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:47:34 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/31 12:42:15 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/31 17:28:08 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#include "drawer.h"
-#include "error.h"
-#include "raytracer.h"
-#include "parser.h"
 
 static void	print_fps(void)
 {
