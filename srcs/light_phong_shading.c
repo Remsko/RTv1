@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 18:25:39 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/02/02 13:26:57 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/02 16:37:00 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	set_ambient_light(t_color *c, t_object obj)
 {
 	t_color ambient;
 
-	ambient = (t_color){ .r = 0.5, .g = 0.5, .b = 0.5, .a = 1};
+	ambient = (t_color){ .r = 0.2, .g = 0.2, .b = 0.2, .a = 1};
 	*c = (t_color){ .r = ambient.r * (obj.color.r / 255.0),
 		.g = ambient.g * (obj.color.g / 255.0),
 		.b = ambient.b * (obj.color.b / 255.0),

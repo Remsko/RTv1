@@ -6,11 +6,29 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 13:10:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/02/02 13:21:19 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/02 16:57:58 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+int			check_distance_between_light_and_intersection(t_point light_pos,
+		t_point inter_pos)
+{
+	double distance;
+
+	if (light_pos.x == 0 && light_pos.y == 0 && light_pos.z == 0)
+	{
+		distance = vector_norm(vector_sub(light_pos, inter_pos));
+		distance = distance < 0 ? -distance : distance;
+		if (distance < 10.000001)
+		{
+			printf("distance = %f\n", distance);
+			return (1);
+		}
+	}
+	return (0);
+}
 
 int			no_object_obstructing_light(t_light *light, t_intersection *inter,
 		t_object *lst_obj)
@@ -19,6 +37,8 @@ int			no_object_obstructing_light(t_light *light, t_intersection *inter,
 	t_ray			light_ray;
 	double			light_distance;
 
+//	if (check_distance_between_light_and_intersection(light->pos, inter->pos))
+//			return (0);
 	new_inter.t = MAX_RAY_LENGTH;
 	light_ray.pos = inter->pos;
 	light_ray.dir = vector_sub(light->pos, inter->pos);
@@ -46,7 +66,7 @@ t_color		process_light(t_light *lst_light, t_object *lst_obj,
 			inter->light_vector = vector_sub(lst_light->pos, inter->pos);
 			normalize_vector(&inter->light_vector);
 			cos_teta = dot_product(inter->normal, inter->light_vector);
-			if (cos_teta >= 0)
+			if (cos_teta > 0)
 				add_diffuse_light(&c, inter->obj, lst_light, cos_teta);
 			add_specular_light(&c, r.pos, inter);
 		}

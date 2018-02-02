@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 15:51:28 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/02/02 13:40:59 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/02 14:46:11 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_bool	intersection(t_ray r, t_object *obj, t_intersection *inter)
 	double t;
 	t_bool ret;
 
-	t = MAX_RAY_LENGTH + 1000000;
+	t = MAX_RAY_LENGTH;
 	ret = 0;
 	while (obj != NULL)
 	{
