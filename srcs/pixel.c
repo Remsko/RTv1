@@ -6,19 +6,18 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:24:30 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/01/26 17:14:57 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/01/31 18:08:03 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pixel.h"
 #include "rtv1.h"
-#include "math.h"
-#include "types.h"
 
-t_color		get_final_color(t_color c)
+void		get_final_color(t_color *c)
 {
-	c.r = fmin(c.r, 1.0) * 255.0;
-	c.g = fmin(c.g, 1.0) * 255.0;
-	c.b = fmin(c.b, 1.0) * 255.0;
-	return (c);
+	c->r = fmax(c->r, 0.0);
+	c->g = fmax(c->g, 0.0);
+	c->b = fmax(c->b, 0.0);
+	c->r = fmin(c->r, 1.0) * 255.0;
+	c->g = fmin(c->g, 1.0) * 255.0;
+	c->b = fmin(c->b, 1.0) * 255.0;
 }
