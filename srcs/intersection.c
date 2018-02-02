@@ -6,13 +6,13 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 15:51:28 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/31 18:32:51 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/02 13:40:59 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void   inter_cylinder(t_ray r, t_object *obj, double *t)
+void	inter_cylinder(t_ray r, t_object *obj, double *t)
 {
 	t_point pos;
 	t_point dir;
@@ -27,7 +27,7 @@ void   inter_cylinder(t_ray r, t_object *obj, double *t)
 	return (solve_equation(poly, t));
 }
 
-void          inter_cone(t_ray r, t_object *obj, double *t)
+void	inter_cone(t_ray r, t_object *obj, double *t)
 {
 	t_point pos;
 	t_point dir;

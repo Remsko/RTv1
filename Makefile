@@ -6,7 +6,7 @@
 #    By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/24 11:54:00 by rpinoit           #+#    #+#              #
-#    Updated: 2018/01/31 18:21:17 by rpinoit          ###   ########.fr        #
+#    Updated: 2018/02/02 09:19:08 by rpinoit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRC = srcs/main.c \
 	  srcs/parser_libft.c \
 	  srcs/math_utilities.c \
 	  srcs/pixel.c \
-	  srcs/obj_normal.c
+	  srcs/obj_normal.c \
+	  srcs/light_phong_shading.c
 
 OBJ = $(SRC:%.c=%.o)
 
