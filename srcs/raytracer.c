@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:47:44 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/31 18:58:41 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/02 17:01:42 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,21 @@ t_ray		get_prim_ray(t_2ipair p, t_env *env)
 	t_ray		r;
 
 	cam = &env->scene.cam;
-	r.dir.x = cam->d * cam->uvn.n.x - (cam->near.x / 2.0) * cam->uvn.u.x + (cam->near.y / 2.0) * cam->uvn.v.x + (((double)p.x + 0.5) * cam->step.x) * cam->uvn.u.x - (((double)p.y + 0.5) * cam->step.y) * cam->uvn.v.x;
-	r.dir.y = cam->d * cam->uvn.n.y - (cam->near.x / 2.0) * cam->uvn.u.y + (cam->near.y / 2.0) * cam->uvn.v.y + (((double)p.x + 0.5) * cam->step.x) * cam->uvn.u.y - (((double)p.y + 0.5) * cam->step.y) * cam->uvn.v.y;
-	r.dir.z = cam->d * cam->uvn.n.z - (cam->near.x / 2.0) * cam->uvn.u.z + (cam->near.y / 2.0) * cam->uvn.v.z + (((double)p.x + 0.5) * cam->step.x) * cam->uvn.u.z - (((double)p.y + 0.5) * cam->step.y) * cam->uvn.v.z;
+	r.dir.x = cam->d * cam->uvn.n.x
+		- (cam->near.x / 2.0) * cam->uvn.u.x
+		+ (cam->near.y / 2.0) * cam->uvn.v.x
+		+ (((double)p.x + 0.5) * cam->step.x) * cam->uvn.u.x
+		- (((double)p.y + 0.5) * cam->step.y) * cam->uvn.v.x;
+	r.dir.y = cam->d * cam->uvn.n.y
+		- (cam->near.x / 2.0) * cam->uvn.u.y
+		+ (cam->near.y / 2.0) * cam->uvn.v.y
+		+ (((double)p.x + 0.5) * cam->step.x) * cam->uvn.u.y
+		- (((double)p.y + 0.5) * cam->step.y) * cam->uvn.v.y;
+	r.dir.z = cam->d * cam->uvn.n.z
+		- (cam->near.x / 2.0) * cam->uvn.u.z
+		+ (cam->near.y / 2.0) * cam->uvn.v.z
+		+ (((double)p.x + 0.5) * cam->step.x) * cam->uvn.u.z
+		- (((double)p.y + 0.5) * cam->step.y) * cam->uvn.v.z;
 	normalize_vector(&r.dir);
 	r.pos = cam->pos;
 	r.depth = MAX_RAY_DEPTH;
@@ -52,8 +64,8 @@ t_color		raytrace(t_ray r, t_env *env)
 {
 	t_intersection	inter;
 	t_color			c;
-	//	c = (t_color){109 / 255.0, 109 / 255.0, 109 / 255.0, 1};
-	c = (t_color){0.0, 0.0, 0.0, 1};
+
+	c = (t_color){ .r = 0.0, .g = 0.0, .b = 0.0, .a = 1};
 	inter.t = MAX_RAY_LENGTH;
 	if (intersection(r, env->scene.objs, &inter))
 	{

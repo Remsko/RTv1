@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 18:32:28 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/31 18:28:59 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/02 10:14:51 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,8 @@ typedef struct			s_intersection
 {
 	t_object	obj;
 	t_point		pos;
+	t_point		normal;
+	t_point		light_vector;
 	double		t;
 }						t_intersection;
 

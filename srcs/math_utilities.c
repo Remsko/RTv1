@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 10:32:34 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/31 18:11:46 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/02 15:24:10 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	solve_equation(t_point poly, double *t)
 		return ;
 	x1 = (-poly.y + sqrt(delta)) / (2.0 * poly.x);
 	x2 = (-poly.y - sqrt(delta)) / (2.0 * poly.x);
-	if (x1 < x2 && x1 > 0.1)
+	if (x1 < x2 && x1 > 0.000001)
 		*t = x1;
-	else if (x2 > 0.1)
+	else if (x2 > 0.000001)
 		*t = x2;
 }
 

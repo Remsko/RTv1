@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 18:32:17 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/01/31 17:46:24 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/05 08:49:26 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,14 @@
 # include "types.h"
 # include "event.h"
 
-# define W_WIDTH 900
-# define W_HEIGHT 900
+# define W_WIDTH 1000
+# define W_HEIGHT 1000
 
 # define MAX_RAY_DEPTH 4
 # define MAX_RAY_LENGTH 0xffffff
+
+typedef unsigned char	t_bool;
+typedef unsigned int	t_uint32;
 
 typedef struct			s_win
 {
@@ -76,5 +79,6 @@ void					destroy(t_env *env);
 # include "vector_utilities.h"
 # include "intersection.h"
 # include "pixel.h"
+# include "vector_rotate.h"
 
 #endif
