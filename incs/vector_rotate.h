@@ -13,6 +13,8 @@
 #ifndef VECTOR_ROTATE_H
 # define VECTOR_ROTATE_H
 
+#include "rtv1.h"
+
 void vec_unrotate(t_point *vec, t_point rotate);
 
 void rotate_vec(t_point *vec, t_point rotate);

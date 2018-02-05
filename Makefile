@@ -38,10 +38,10 @@ OBJ = $(SRC:%.c=%.o)
 INC = -I./incs \
 	  -I./libft/ \
 	  -I/usr/include \
-	  -I ~/Library/Frameworks/SDL2.framework/Headers \
+	  -I /Library/Frameworks/SDL2.framework/Headers \
 
 LIB = -L./libft \
-	  -F ~/Library/Frameworks/SDL2.framework/Versions/Current \
+	  -F /Library/Frameworks/SDL2.framework/Versions/Current \
 
 all: $(NAME)
 
