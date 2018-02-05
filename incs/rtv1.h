@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 18:32:17 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/02/02 13:29:25 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/05 08:49:26 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ void					destroy(t_env *env);
 # include "vector_utilities.h"
 # include "intersection.h"
 # include "pixel.h"
+# include "vector_rotate.h"
 
 #endif
