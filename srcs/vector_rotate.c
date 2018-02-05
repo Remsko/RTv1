@@ -6,12 +6,12 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 08:48:09 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/02/05 12:55:11 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/05 15:30:03 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-/*
+
    static void rotate_x(t_point *vec, double angle)
    {
    double	tmp_y;
@@ -44,7 +44,7 @@
    vec->x = tmp_x * cos(angle) - tmp_y * sin(angle);
    vec->y = tmp_x * sin(angle) + tmp_y * cos(angle);
    }
-   */
+  /*
 static void rotate_x(t_point *vec, double angle)
 {
 	double  tmp_y;
@@ -77,7 +77,7 @@ static void rotate_z(t_point *vec, double angle)
 	vec->x = tmp_x * cos(angle) + tmp_y * sin(angle);
 	vec->y = -tmp_x * sin(angle) + tmp_y * cos(angle);
 }
-
+*/
 void vec_unrotate(t_point *vec, t_point rotate)
 {
 	rotate_x(vec, -ft_degtorad(rotate.x));

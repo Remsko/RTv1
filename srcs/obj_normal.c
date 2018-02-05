@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:26:06 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/02/05 13:01:39 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/05 16:24:08 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	get_cylinder_normal(t_intersection *inter)
 {
 	t_point rotate;
 
-	rotate = (t_point){0, 90, 0};
+	rotate = (t_point){120, 30, 0};
 	inter->normal = vector_sub(inter->pos, inter->obj.pos);
 	rotate_vec(&inter->normal, rotate);
 	inter->normal.z = 0;
