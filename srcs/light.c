@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 13:10:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/02/05 15:23:35 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/05 16:58:28 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_color		process_light(t_light *lst_light, t_object *lst_obj,
 	t_color c;
 	double	cos_teta;
 
+//	(void)r;
 	set_ambient_light(&c, inter->obj);
 	get_normal(inter);
 	normalize_vector(&inter->normal);

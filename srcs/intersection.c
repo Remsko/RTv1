@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 15:51:28 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/02/05 16:13:49 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/06 12:09:48 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	inter_cylinder(t_ray r, t_object *obj, double *t)
 	t_point poly;
 	t_point rotate;
 
-	rotate = (t_point){120, 30, 0};
-	dir = r.dir;
+	rotate = (t_point){90, 30, 120};
+	dir = (t_point){r.dir.x, r.dir.y, r.dir.z};
 	pos = vector_sub(r.pos, obj->pos);
-	rotate_vec(&dir, rotate);
 	rotate_vec(&pos, rotate);
+	rotate_vec(&dir, rotate);
 	poly.x = dir.x * dir.x + dir.y * dir.y;
 	poly.y = dir.x * pos.x + dir.y * pos.y;
 	poly.y *= 2.0;
