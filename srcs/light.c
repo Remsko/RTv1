@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 13:10:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/02/05 16:58:28 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/06 12:49:17 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_color		process_light(t_light *lst_light, t_object *lst_obj,
 			inter->light_vector = vector_sub(lst_light->pos, inter->pos);
 			normalize_vector(&inter->light_vector);
 			cos_teta = dot_product(inter->normal, inter->light_vector);
-			if (cos_teta > 0)
+			if (cos_teta >= 0 && cos_teta <= 1)
 				add_diffuse_light(&c, inter->obj, lst_light, cos_teta);
 			add_specular_light(&c, r.pos, inter);
 		}
