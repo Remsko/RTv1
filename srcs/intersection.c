@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 15:51:28 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/02/14 18:57:19 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/15 18:35:21 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,14 @@ void	inter_cylinder(t_ray r, t_object *obj, double *t)
 	t_point poly;
 	t_point rotate;
 
-	rotate = (t_point){30.0, -30.0, 0.0};
+	rotate = (t_point){0.0, 0.0, 0.0};
 	dir = (t_point){r.dir.x, r.dir.y, r.dir.z};
 	pos = vector_sub(r.pos, obj->pos);
 	rotate_vec(&pos, rotate);
 	rotate_vec(&dir, rotate);
-	poly.x = dir.x * dir.x + dir.y * dir.y;
-	poly.y = dir.x * pos.x + dir.y * pos.y;
-	poly.y *= 2.0;
-	poly.z = pos.x * pos.x + pos.y * pos.y;
+	poly.x = dir.x * dir.x + dir.z * dir.z;
+	poly.y = 2.0 * (dir.x * pos.x + dir.z * pos.z);
+	poly.z = pos.x * pos.x + pos.z * pos.z;
 	poly.z -= obj->radius * obj->radius;
 	return (solve_equation(poly, t));
 }
@@ -40,7 +39,7 @@ void	inter_cone(t_ray r, t_object *obj, double *t)
 	double	radius;
 	t_point rotate;
 
-	rotate = (t_point){0.0, 30.0, 0.0};
+	rotate = (t_point){30.0, 120.0, 260.0};
 	dir = (t_point){r.dir.x, r.dir.y, r.dir.z};
 	pos = vector_sub(r.pos, obj->pos);
 //	printf("pos.x = %f\n", pos.x);
@@ -52,10 +51,9 @@ void	inter_cone(t_ray r, t_object *obj, double *t)
 //	printf("pos.y = %f\n", pos.y);
 //	printf("pos.z = %f\n", pos.z);
 	radius = sin(ft_degtorad(obj->radius)) * sin(ft_degtorad(obj->radius));
-	poly.x = dir.x * dir.x + dir.y * dir.y - dir.z * dir.z * radius;
-	poly.y = dir.x * pos.x + dir.y * pos.y - dir.z * pos.z * radius;
-	poly.y *= 2.0;
-	poly.z = pos.x * pos.x + pos.y * pos.y - pos.z * pos.z * radius;
+	poly.x = dir.x * dir.x - dir.y * dir.y * radius + dir.z * dir.z;
+	poly.y = 2.0 * (dir.x * pos.x - dir.y * pos.y * radius + dir.z * pos.z);
+	poly.z = pos.x * pos.x - pos.y * pos.y * radius + pos.z * pos.z;
 	return (solve_equation(poly, t));
 }
 
