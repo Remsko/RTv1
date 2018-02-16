@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 13:10:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/02/14 20:15:58 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/16 15:29:37 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int			check_distance_between_light_and_intersection(t_point light_pos,
 	return (0);
 }
 
-int			no_object_obstructing_light(t_light *light, t_intersection *inter,
+int			no_object_obstructing_light(t_env *env, t_light *light, t_intersection *inter,
 		t_object *lst_obj)
 {
 	t_intersection	new_inter;
@@ -44,13 +44,13 @@ int			no_object_obstructing_light(t_light *light, t_intersection *inter,
 	light_ray.dir = vector_sub(light->pos, inter->pos);
 	light_distance = vector_norm(light_ray.dir);
 	normalize_vector(&light_ray.dir);
-	intersection(light_ray, lst_obj, &new_inter);
+	intersection(env, light_ray, lst_obj, &new_inter);
 	if (new_inter.t <= light_distance)
 		return (0);
 	return (1);
 }
 
-t_color		process_light(t_light *lst_light, t_object *lst_obj,
+t_color		process_light(t_env *env, t_light *lst_light, t_object *lst_obj,
 		t_intersection *inter, t_ray r)
 {
 	t_color c;
@@ -59,7 +59,7 @@ t_color		process_light(t_light *lst_light, t_object *lst_obj,
 	set_ambient_light(&c, inter->obj);
 	while (lst_light)
 	{
-		if (no_object_obstructing_light(lst_light, inter, lst_obj))
+		if (no_object_obstructing_light(env, lst_light, inter, lst_obj))
 		{
 			inter->light_vector = vector_sub(lst_light->pos, inter->pos);
 			normalize_vector(&inter->light_vector);

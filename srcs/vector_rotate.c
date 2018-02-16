@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 08:48:09 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/02/15 16:12:49 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/16 14:14:56 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static void rotate_y(t_point *vec, double angle)
 
 	tmp_x = vec->x;
 	tmp_z = vec->z;
-	vec->x = tmp_z * sin(angle) + tmp_x * cos(angle);
 	vec->z = tmp_z * cos(angle) - tmp_x * sin(angle);
+	vec->x = tmp_z * sin(angle) + tmp_x * cos(angle);
 }
 
 static void rotate_z(t_point *vec, double angle)

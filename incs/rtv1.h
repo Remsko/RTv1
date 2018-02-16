@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 18:32:17 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/02/05 08:49:26 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/16 18:08:48 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,18 @@
 # include "libft.h"
 # include "types.h"
 # include "event.h"
+# include "mlx.h"
 
-# define W_WIDTH 1000
-# define W_HEIGHT 1000
+# define WIN_W 800
+# define WIN_H 800
+
+# define KEY_ESCAPE 53
+# define KEY_LEFT 124
+# define KEY_DOWN 126
+# define KEY_RIGHT 123
+# define KEY_UP 125
+# define KEY_MINUS 27
+# define KEY_PLUS 24
 
 # define MAX_RAY_DEPTH 4
 # define MAX_RAY_LENGTH 0xffffff
@@ -53,13 +62,33 @@ typedef struct			s_scene
 
 typedef struct			s_env
 {
+	void            *mlx;
+	void            *win;
+	void            *img;
+	char            *data;
+	int             bpp;
+	int             sline;
+	int             endian;
+	double			win_w;
+	double			win_h;
+	int				mark;
 	t_scene		scene;
-	t_event		event;
-	t_win		win;
-	t_rend		rend;
+//	t_event		event;
+//	t_win		win;
+//	t_rend		rend;
 	int			argc;
 	char		**argv;
+	t_point		obj_rot;
+	t_point		cam_rot;
 }						t_env;
+
+void put_pixel(t_env *env, t_point *pos, t_color c);
+
+void    mlx_draw_rt(t_env *env);
+
+int     expose_hook(t_env *env);
+
+int     key_hook(int key, t_env *env);
 
 void					init(t_env *env);
 

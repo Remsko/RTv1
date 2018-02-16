@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:26:06 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/02/15 18:36:31 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/16 14:10:26 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,24 @@ void	get_plane_normal(t_intersection *inter)
 
 void	get_cylinder_normal(t_intersection *inter)
 {
-	t_point rotate;
 	t_point	normal;
 
-	rotate = (t_point){0.0, 0.0, 0.0};
 	normal = vector_sub(inter->pos, inter->obj.pos);
-	rotate_vec(&normal, rotate);
+	rotate_vec(&normal, inter->obj.rot);
 	normal.y = 0;
-	vec_unrotate(&normal, rotate);
+	vec_unrotate(&normal, inter->obj.rot);
 	inter->normal = normal;
 	normalize_vector(&inter->normal);
 }
 
 void	get_cone_normal(t_intersection *inter)
 {
-	t_point rotate;
 	t_point	normal;
 
-	rotate = (t_point){30.0, 120.0, 260.0};
 	normal = vector_sub(inter->pos, inter->obj.pos);
-	rotate_vec(&normal, rotate);
+	rotate_vec(&normal, inter->obj.rot);
 	normal.y *= -1;
-	vec_unrotate(&normal, rotate);
+	vec_unrotate(&normal, inter->obj.rot);
 	inter->normal = normal;
 	normalize_vector(&inter->normal);
 }

@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 15:51:28 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/02/15 18:35:21 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/16 16:04:39 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,11 @@ void	inter_cylinder(t_ray r, t_object *obj, double *t)
 	t_point pos;
 	t_point dir;
 	t_point poly;
-	t_point rotate;
 
-	rotate = (t_point){0.0, 0.0, 0.0};
 	dir = (t_point){r.dir.x, r.dir.y, r.dir.z};
 	pos = vector_sub(r.pos, obj->pos);
-	rotate_vec(&pos, rotate);
-	rotate_vec(&dir, rotate);
+	rotate_vec(&pos, obj->rot);
+	rotate_vec(&dir, obj->rot);
 	poly.x = dir.x * dir.x + dir.z * dir.z;
 	poly.y = 2.0 * (dir.x * pos.x + dir.z * pos.z);
 	poly.z = pos.x * pos.x + pos.z * pos.z;
@@ -37,16 +35,14 @@ void	inter_cone(t_ray r, t_object *obj, double *t)
 	t_point dir;
 	t_point poly;
 	double	radius;
-	t_point rotate;
 
-	rotate = (t_point){30.0, 120.0, 260.0};
 	dir = (t_point){r.dir.x, r.dir.y, r.dir.z};
 	pos = vector_sub(r.pos, obj->pos);
 //	printf("pos.x = %f\n", pos.x);
 //	printf("pos.y = %f\n", pos.y);
 //	printf("pos.z = %f\n", pos.z);
-	rotate_vec(&pos, rotate);
-	rotate_vec(&dir, rotate);
+	rotate_vec(&pos, obj->rot);
+	rotate_vec(&dir, obj->rot);
 //	printf("pos.x = %f\n", pos.x);
 //	printf("pos.y = %f\n", pos.y);
 //	printf("pos.z = %f\n", pos.z);
@@ -89,7 +85,7 @@ void	inter_plane(t_ray r, t_object *obj, double *t)
 	*t = -n / d > 0.000001 ? -n / d : MAX_RAY_LENGTH;
 }
 
-t_bool	intersection(t_ray r, t_object *obj, t_intersection *inter)
+t_bool	intersection(t_env *env, t_ray r, t_object *obj, t_intersection *inter)
 {
 	double t;
 	t_bool ret;
@@ -98,6 +94,7 @@ t_bool	intersection(t_ray r, t_object *obj, t_intersection *inter)
 	ret = 0;
 	while (obj != NULL)
 	{
+		obj->rot = env->obj_rot;
 		if (obj->type == sphere)
 			inter_sphere(r, obj, &t);
 		else if (obj->type == plan)
