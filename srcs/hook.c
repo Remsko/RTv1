@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 12:06:14 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/02/20 11:45:38 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/20 17:11:12 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int		expose_hook(t_env *env)
 
 int		key_hook(int key, t_env *env)
 {
-	printf("key = %d\n", key);
 	if (key == KEY_ESCAPE)
 	{
 		mlx_destroy_window(env->mlx, env->win);
@@ -38,9 +37,9 @@ int		key_hook(int key, t_env *env)
 		env->obj_rot.z = env->obj_rot.z == 350 ? 0 : env->obj_rot.z + 10;
 	if (key == KEY_MINUS)
 		env->obj_rot.z = env->obj_rot.z == -350 ? 0 : env->obj_rot.z - 10;
-	if (key == KEY_A)
-		env->cam_rot.y = env->cam_rot.y == 350 ? 0 : env->cam_rot.y + 10;
 	if (key == KEY_D)
+		env->cam_rot.y = env->cam_rot.y == 350 ? 0 : env->cam_rot.y + 10;
+	if (key == KEY_A)
 		env->cam_rot.y = env->cam_rot.y == -350 ? 0 : env->cam_rot.y - 10;
 	if (key == KEY_W)
 		env->cam_rot.x = env->cam_rot.x == 350 ? 0 : env->cam_rot.x + 10;

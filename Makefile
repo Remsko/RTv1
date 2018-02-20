@@ -6,7 +6,7 @@
 #    By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/24 11:54:00 by rpinoit           #+#    #+#              #
-#    Updated: 2018/02/16 12:58:56 by rpinoit          ###   ########.fr        #
+#    Updated: 2018/02/20 17:24:18 by rpinoit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRC = srcs/main.c \
 	  srcs/light_phong_shading.c \
 	  srcs/vector_rotate.c \
 	  srcs/draw.c \
-	  srcs/hook.c
+	  srcs/hook.c \
+	  srcs/anti_alias.c
 
 OBJ = $(SRC:%.c=%.o)
 

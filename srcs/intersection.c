@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 15:51:28 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/02/16 16:04:39 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/20 15:09:19 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	inter_cylinder(t_ray r, t_object *obj, double *t)
 	rotate_vec(&dir, obj->rot);
 	poly.x = dir.x * dir.x + dir.z * dir.z;
 	poly.y = 2.0 * (dir.x * pos.x + dir.z * pos.z);
-	poly.z = pos.x * pos.x + pos.z * pos.z;
-	poly.z -= obj->radius * obj->radius;
+	poly.z = pos.x * pos.x + pos.z * pos.z - obj->radius * obj->radius;
 	return (solve_equation(poly, t));
 }
 
@@ -47,7 +46,9 @@ void	inter_cone(t_ray r, t_object *obj, double *t)
 //	printf("pos.y = %f\n", pos.y);
 //	printf("pos.z = %f\n", pos.z);
 	radius = sin(ft_degtorad(obj->radius)) * sin(ft_degtorad(obj->radius));
-	poly.x = dir.x * dir.x - dir.y * dir.y * radius + dir.z * dir.z;
+	poly.x = dir.x * dir.x
+		- dir.y * dir.y * radius
+		+ dir.z * dir.z;
 	poly.y = 2.0 * (dir.x * pos.x - dir.y * pos.y * radius + dir.z * pos.z);
 	poly.z = pos.x * pos.x - pos.y * pos.y * radius + pos.z * pos.z;
 	return (solve_equation(poly, t));

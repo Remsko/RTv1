@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 18:32:17 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/02/20 11:45:41 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/20 17:24:01 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include "event.h"
 # include "mlx.h"
 
-# define WIN_W 800
-# define WIN_H 800
+# define WIN_W 1000
+# define WIN_H 1000
 
 # define KEY_ESCAPE 53
 # define KEY_LEFT 123
@@ -108,6 +108,7 @@ void					process(t_env *env);
 
 void					destroy(t_env *env);
 
+# include "anti_alias.h"
 # include "camera.h"
 # include "light.h"
 # include "raytracer.h"
