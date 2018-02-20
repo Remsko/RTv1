@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 18:32:17 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/02/16 18:08:48 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/20 11:45:41 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,24 @@
 # define WIN_H 800
 
 # define KEY_ESCAPE 53
-# define KEY_LEFT 124
+# define KEY_LEFT 123
 # define KEY_DOWN 126
-# define KEY_RIGHT 123
+# define KEY_RIGHT 124
 # define KEY_UP 125
 # define KEY_MINUS 27
 # define KEY_PLUS 24
+# define KEY_A 0
+# define KEY_D 2
+# define KEY_W 13
+# define KEY_S 1
+# define KEY_1 18
+# define KEY_2 19
+# define KEY_I 34
+# define KEY_J 38
+# define KEY_L 37
+# define KEY_K 40
+# define KEY_8 28
+# define KEY_9 25
 
 # define MAX_RAY_DEPTH 4
 # define MAX_RAY_LENGTH 0xffffff
