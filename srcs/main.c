@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:47:09 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/02/20 11:03:38 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/21 11:36:09 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int		main(int argc, char **argv)
 	env.mark = 0;
 	env.argc = argc;
 	env.argv = argv;
-	env.obj_rot = (t_point){0, 0, 0};
+	env.obj_rot.x = 0;
+	env.obj_rot.y = 0;
+	env.obj_rot.z = 0;
+//	env.obj_rot = (t_point){90, 0, 90};
 	env.cam_rot = (t_point){0, 0, 0};
 	reader(&env);
 	init_win(&env, argv[1]);

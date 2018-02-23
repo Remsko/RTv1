@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/14 13:10:17 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/02/20 14:39:49 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/02/23 17:06:33 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int			check_distance_between_light_and_intersection(t_point light_pos,
 
 	if (light_pos.x == 0 && light_pos.y == 0 && light_pos.z == 0)
 	{
-		distance = vector_norm(vector_sub(light_pos, inter_pos));
+		distance = vector_len(vector_sub(light_pos, inter_pos));
 		distance = distance < 0 ? -distance : distance;
 		if (distance < 10.000001)
 		{
@@ -42,7 +42,7 @@ int			no_object_obstructing_light(t_env *env, t_light *light, t_intersection *in
 	new_inter.t = MAX_RAY_LENGTH;
 	light_ray.pos = inter->pos;
 	light_ray.dir = vector_sub(light->pos, inter->pos);
-	light_distance = vector_norm(light_ray.dir);
+	light_distance = vector_len(light_ray.dir);
 	normalize_vector(&light_ray.dir);
 	intersection(env, light_ray, lst_obj, &new_inter);
 	if (new_inter.t < light_distance)
@@ -55,8 +55,10 @@ t_color		process_light(t_env *env, t_light *lst_light, t_object *lst_obj,
 {
 	t_color c;
 	double	cos_teta;
+	(void)r;
 
 	set_ambient_light(&c, inter->obj);
+//	inter->normal = get_normal(inter, env->scene.objs);
 	while (lst_light)
 	{
 		if (no_object_obstructing_light(env, lst_light, inter, lst_obj))
@@ -65,7 +67,7 @@ t_color		process_light(t_env *env, t_light *lst_light, t_object *lst_obj,
 			normalize_vector(&inter->light_vector);
 			cos_teta = dot_product(inter->normal, inter->light_vector);
 			if (cos_teta >= 0 && cos_teta <= 1)
-				add_diffuse_light(&c, inter->obj, lst_light, cos_teta);
+							add_diffuse_light(&c, inter->obj, lst_light, cos_teta);
 			add_specular_light(&c, r.pos, inter);
 		}
 		lst_light = lst_light->next;
