@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 18:32:17 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/02/20 17:24:01 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/03/05 16:40:30 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@
 
 # define MAX_RAY_DEPTH 4
 # define MAX_RAY_LENGTH 0xffffff
+
+# define SEPIA 0
+# define FIFTYSHADES 0
+# define DALTO 0
+# define TEXTURE 1
 
 typedef unsigned char	t_bool;
 typedef unsigned int	t_uint32;
@@ -108,6 +113,7 @@ void					process(t_env *env);
 
 void					destroy(t_env *env);
 
+# include "perlin.h"
 # include "anti_alias.h"
 # include "camera.h"
 # include "light.h"
