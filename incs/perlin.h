@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 11:49:03 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/03/05 14:14:12 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/03/05 19:18:04 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define BM 0xff
 
 # define N 0x1000
-# define NP 12 /* 2^N */
+# define NP 12 / * 2^N */
 # define NM 0xfff
 
 # define S_CURVE(t) ( t * t * (3.0 - 2.0 * t) )

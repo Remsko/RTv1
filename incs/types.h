@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 18:32:28 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/02/26 13:20:05 by ada-cunh         ###   ########.fr       */
+/*   Updated: 2018/03/06 17:46:56 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,10 @@ typedef struct			s_camera
 
 typedef struct			s_material
 {
-//	float			shine;
-//  float			shinestrength;
-//  float			transmission;
-//  float			reflection;
+//	double			shine;
+//  double			shinestrength;
+//  double			transmission;
+//  double			reflection;
     t_color			specular;
     t_color			ambient;
     t_color			diffuse;
@@ -134,8 +134,10 @@ typedef struct          s_object
 
 	//CONE
 	//double		radius;
-	t_ray			normal_vector;
-	t_point			rot;      
+//	t_ray			normal_vector;
+	t_point			rot;
+	double			reflection;
+	double			recursion_depth;
     struct s_object *next;
 }                       t_object;
 
@@ -145,6 +147,7 @@ typedef struct			s_intersection
 	t_point		pos;
 	t_point		normal;
 	t_point		light_vector;
+	t_point		refra;
 	double		t;
 }						t_intersection;
 
