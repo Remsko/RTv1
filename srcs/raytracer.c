@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:47:44 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/03/06 18:17:48 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/03/07 15:54:43 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,33 @@ void		get_reflected_ray(t_ray *reflected, t_intersection *inter, const t_ray *r)
 
 	vision = vector_sub(r->pos, inter->pos);
 	reflected->pos = inter->pos;
-	reflected->dir = vector_add(vector_multiply(inter->normal,
-				-2.0 * dot_product(inter->normal,
+	reflected->dir = vector_sub(vector_multiply(inter->normal,
+				2.0 * dot_product(inter->normal,
 					vision)), vision);
-	reflected->depth -= 1;
+	reflected->depth = r->depth - 1;
 	normalize_vector(&reflected->dir);
 }
 
-t_color		raytrace(const t_ray r, const t_env *env)
+void		get_refracted_ray(t_ray *refracted, t_intersection *inter, const t_ray *r)
+{
+	t_point vision;
+
+	vision = vector_sub(r->pos, inter->pos);
+	refracted->pos = inter->pos;
+	refracted->dir = vector_sub(vector_multiply(inter->normal,
+				2.0 * dot_product(inter->normal,
+					vision)), vision);
+	refracted->depth = r->depth - 1;
+	normalize_vector(&refracted->dir);
+}
+
+t_color		raytrace(t_ray r, const t_env *env)
 {
 	t_intersection	inter;
 	t_color			c;
 	t_color			r_c;
 	t_ray			reflected_ray;
+//	t_ray			refracted_ray;
 
 	/*	t_object *tamer;
 
@@ -110,11 +124,14 @@ t_color		raytrace(const t_ray r, const t_env *env)
 		c = process_light(env, env->thenv[0]->scene.lgts, env->thenv[0]->scene.objs, &inter, r);
 		get_final_color(&c);
 		if (inter.obj.type == sphere)
-		{
 			inter.obj.reflection = 1;
-		}
 		else
 			inter.obj.reflection = 0;
+		//		if (inter.obj.type == plan)
+		//		{
+		//			printf("r.depth = %d\n", r.depth);
+		//			exit(-1);
+		//		}
 		if (inter.obj.reflection > 0 && r.depth > 0)
 		{
 			get_reflected_ray(&reflected_ray, &inter, &r);
@@ -129,6 +146,20 @@ t_color		raytrace(const t_ray r, const t_env *env)
 				c.b += inter.obj.reflection * r_c.b;
 			}
 		}
+	/*	if (inter.obj.refraction > 0 && r.depth > 0)
+		{
+			get_refracted_ray(&refracted_ray, &inter, &r);
+			r_c = raytrace(refracted_ray, env);
+			c.r *= (1 - inter.obj.refraction);
+			c.g *= (1 - inter.obj.refraction);
+			c.b *= (1 - inter.obj.refraction);
+			if (r_c.r != 0.0 && r_c.r != 0.0 && r_c.r != 0.0)
+			{
+				c.r += inter.obj.refraction * r_c.r;
+				c.g += inter.obj.refraction * r_c.g;
+				c.b += inter.obj.refraction * r_c.b;
+			}
+		}*/
 	}
 	return (c);
 }

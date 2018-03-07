@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 15:51:28 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/03/05 09:30:05 by jpicot           ###   ########.fr       */
+/*   Updated: 2018/03/07 15:51:04 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ t_bool	intersection(const t_env *env, t_ray r, t_object *obj, t_intersection *in
 			inter_cone(r, obj, &t);
 //		else if (obj->type == hyperboloid)
 //			inter_hyper(r, obj, &t);
-		if (t < inter->t /*&& t > 0.000001*/)
+		if (t < inter->t && t > 0.000001)
 		{
 			inter->obj = *obj;
 			inter->t = t;
