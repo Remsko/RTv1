@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:47:44 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/03/07 15:54:43 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/03/07 18:57:58 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void		get_reflected_ray(t_ray *reflected, t_intersection *inter, const t_ray *r)
 {
 	t_point	vision;
 
-	vision = vector_sub(r->pos, inter->pos);
+	vision = vector_sub(inter->pos, r->pos);
 	reflected->pos = inter->pos;
 	reflected->dir = vector_sub(vector_multiply(inter->normal,
 				2.0 * dot_product(inter->normal,
@@ -80,16 +80,41 @@ void		get_reflected_ray(t_ray *reflected, t_intersection *inter, const t_ray *r)
 	normalize_vector(&reflected->dir);
 }
 
+t_point vector_mul(t_point p1, t_point p2)
+{
+	t_point p;
+
+	p.x = p1.x * p2.x;
+	p.y = p1.y * p2.y;
+	p.z = p1.z * p2.z;
+	return (p);
+}
+
 void		get_refracted_ray(t_ray *refracted, t_intersection *inter, const t_ray *r)
 {
 	t_point vision;
+	//t_point	z;
+	//double	term;
+	double	n1;
+	double	n2;
 
-	vision = vector_sub(r->pos, inter->pos);
+	n1 = 1.0;
+	n2 = 2.5;
+	vision = vector_sub(inter->pos, r->pos);
+	normalize_vector(&vision);
+	/*z = vector_multiply(vector_sub(vision, vector_multiply(inter->normal, dot_product(vision, inter->normal))), (n1 / n2));
+	//	normalize_vector(&z);
+	term = sqrt(1.0 - pow(vector_len(z), 2.0));
 	refracted->pos = inter->pos;
-	refracted->dir = vector_sub(vector_multiply(inter->normal,
-				2.0 * dot_product(inter->normal,
-					vision)), vision);
+	refracted->dir = vector_sub(z, vector_multiply(inter->normal, term));
 	refracted->depth = r->depth - 1;
+	normalize_vector(&refracted->dir);*/
+	double n = n1 / n2;
+	double cos = dot_product(inter->normal, vision);
+	double sin = n * n * (1.0 - cos * cos);
+	double cos_t = sqrt(1.0 - sin);
+	refracted->pos = inter->pos;
+	refracted->dir = vector_add(vector_multiply(vision, n), vector_multiply(inter->normal, (n * cos - cos_t)));
 	normalize_vector(&refracted->dir);
 }
 
@@ -99,7 +124,7 @@ t_color		raytrace(t_ray r, const t_env *env)
 	t_color			c;
 	t_color			r_c;
 	t_ray			reflected_ray;
-//	t_ray			refracted_ray;
+	t_ray			refracted_ray;
 
 	/*	t_object *tamer;
 
@@ -124,29 +149,35 @@ t_color		raytrace(t_ray r, const t_env *env)
 		c = process_light(env, env->thenv[0]->scene.lgts, env->thenv[0]->scene.objs, &inter, r);
 		get_final_color(&c);
 		if (inter.obj.type == sphere)
-			inter.obj.reflection = 1;
+		{
+			inter.obj.refraction = 0.7;
+			inter.obj.reflection = 0.7;
+		}
 		else
+		{
+			inter.obj.refraction = 0;
 			inter.obj.reflection = 0;
+		}
 		//		if (inter.obj.type == plan)
 		//		{
 		//			printf("r.depth = %d\n", r.depth);
 		//			exit(-1);
 		//		}
 		if (inter.obj.reflection > 0 && r.depth > 0)
-		{
-			get_reflected_ray(&reflected_ray, &inter, &r);
-			r_c = raytrace(reflected_ray, env);
-			c.r *= (1 - inter.obj.reflection);
-			c.g *= (1 - inter.obj.reflection);
-			c.b *= (1 - inter.obj.reflection);
-			if (r_c.r != 0.0 && r_c.r != 0.0 && r_c.r != 0.0)
-			{
-				c.r += inter.obj.reflection * r_c.r;
-				c.g += inter.obj.reflection * r_c.g;
-				c.b += inter.obj.reflection * r_c.b;
-			}
-		}
-	/*	if (inter.obj.refraction > 0 && r.depth > 0)
+		  {
+		  get_reflected_ray(&reflected_ray, &inter, &r);
+		  r_c = raytrace(reflected_ray, env);
+		  c.r *= (1 - inter.obj.reflection);
+		  c.g *= (1 - inter.obj.reflection);
+		  c.b *= (1 - inter.obj.reflection);
+		  if (r_c.r != 0.0 && r_c.r != 0.0 && r_c.r != 0.0)
+		  {
+		  c.r += inter.obj.reflection * r_c.r;
+		  c.g += inter.obj.reflection * r_c.g;
+		  c.b += inter.obj.reflection * r_c.b;
+		  }
+		  }
+		if (inter.obj.refraction > 0 && r.depth > 0)
 		{
 			get_refracted_ray(&refracted_ray, &inter, &r);
 			r_c = raytrace(refracted_ray, env);
@@ -159,7 +190,7 @@ t_color		raytrace(t_ray r, const t_env *env)
 				c.g += inter.obj.refraction * r_c.g;
 				c.b += inter.obj.refraction * r_c.b;
 			}
-		}*/
+		}
 	}
 	return (c);
 }
