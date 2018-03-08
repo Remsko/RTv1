@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:47:44 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/03/08 13:40:16 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/03/08 13:44:42 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,44 +92,16 @@ t_point vector_mul(t_point p1, t_point p2)
 
 void		get_refracted_ray(t_ray *refracted, t_intersection *inter, const t_ray *r)
 {
-	t_point vision;
-	t_point	z;
-	double	term;
-	double	n1;
-	double	n2;
-
-	n1 = 1.0;
-	n2 = 1.0;
-	vision = vector_sub(inter->pos, r->pos);
+	t_point vision = vector_sub(inter->pos, r->pos);
 	normalize_vector(&vision);
-	z = vector_multiply(vector_sub(vision, vector_multiply(inter->normal, dot_product(vision, inter->normal))), (n1 / n2));
-		normalize_vector(&z);
-	term = sqrt(1.0 - pow(vector_len(z), 2.0));
-	refracted->pos = vector_multiply(inter->pos, 0.1);
-	refracted->dir = vector_sub(z, vector_multiply(inter->normal, term));
-	normalize_vector(&refracted->dir);
-/*	double n = n1 / n2;
+	double n1 = 1.0;
+	double n2 = 1.2;
+	double n = n1 / n2;
 	double cos = -dot_product(inter->normal, vision);
 	double sin = n * n * (1.0 - cos * cos);
 	double cos_t = sqrt(1.0 - sin);
 	refracted->pos = inter->pos;
 	refracted->dir = vector_add(vector_multiply(vision, n), vector_multiply(inter->normal, (n * cos - cos_t)));
-	t_point n;
-	t_point v;
-	double snell;
-	t_point t;
-
-	n = inter->normal;
-	v = vector_sub(inter->pos, r->pos);
-	normalize_vector(&v);
-	snell = n1 / n1;
-	t.x = (snell * (dot_product(n, v)) - sqrt(1 - ((snell * snell) * (dot_product(n, v) * dot_product(n, v))))) * n.x - snell * v.x;
-	t.y = (snell * (dot_product(n, v)) - sqrt(1 - ((snell * snell) * (dot_product(n, v) * dot_product(n, v))))) * n.y - snell * v.y;
-	t.z = (snell * (dot_product(n, v)) - sqrt(1 - ((snell * snell) * (dot_product(n, v) * dot_product(n, v))))) * n.z - snell * v.z;
-	refracted->pos = inter->pos;
-	refracted->dir = t;
-	refracted->depth = r->depth - 1;
-	normalize_vector(&refracted->dir);*/
 }
 
 t_color		raytrace(t_ray r, const t_env *env)
