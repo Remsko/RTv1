@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:47:44 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/03/08 13:44:42 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/03/08 13:50:48 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void		get_reflected_ray(t_ray *reflected, t_intersection *inter, const t_ray *r)
 {
 	t_point	vision;
 
-	vision = vector_sub(inter->pos, r->pos);
+	vision = vector_sub(r->pos, inter->pos);
 	reflected->pos = inter->pos;
 	reflected->dir = vector_sub(vector_multiply(inter->normal,
 				2.0 * dot_product(inter->normal,
@@ -95,7 +95,7 @@ void		get_refracted_ray(t_ray *refracted, t_intersection *inter, const t_ray *r)
 	t_point vision = vector_sub(inter->pos, r->pos);
 	normalize_vector(&vision);
 	double n1 = 1.0;
-	double n2 = 1.2;
+	double n2 = 1.0;
 	double n = n1 / n2;
 	double cos = -dot_product(inter->normal, vision);
 	double sin = n * n * (1.0 - cos * cos);
@@ -136,8 +136,8 @@ t_color		raytrace(t_ray r, const t_env *env)
 		get_final_color(&c);
 		if (inter.obj.type == sphere)
 		{
-			inter.obj.refraction = 1.0;
-			inter.obj.reflection = 0.0;
+			inter.obj.refraction = 0.0;
+			inter.obj.reflection = 0.7;
 		}
 		else
 		{
