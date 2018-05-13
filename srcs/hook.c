@@ -6,7 +6,7 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 12:06:14 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/03/09 14:34:38 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/05/13 16:45:40 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ int		rot_cam_keyhook(const int key, t_env *env)
 int		pos_cam_keyhook(int key, t_env *env)
 {
 	if (key == KEY_I)
-		env->scene.cam.pos.z += 0;
+		env->scene.cam.pos.z += 10;
 	else if (key == KEY_K)
-		env->scene.cam.pos.z -= 0;
+		env->scene.cam.pos.z -= 10;
 	else if (key == KEY_L)
-		env->scene.cam.pos.x += 0;
+		env->scene.cam.pos.x += 10;
 	else if (key == KEY_J)
-		env->scene.cam.pos.x -= 0;
+		env->scene.cam.pos.x -= 10;
 	else if (key == KEY_9)
-		env->scene.cam.pos.y += 0;
+		env->scene.cam.pos.y += 10;
 	else if (key == KEY_8)
-		env->scene.cam.pos.y -= 0;
+		env->scene.cam.pos.y -= 10;
 	return (1);
 }
 
