@@ -6,7 +6,7 @@
 /*   By: rpinoit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 10:38:40 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/02/02 13:33:04 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/03/08 17:57:50 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int					ft_count_words(char const *s, char c);
 int					ft_atoi_base(const char *str, int str_base);
-const char			*ft_isspace(const char *str);
+int					ft_isspace(int c);
 void				ft_print_words_tables(char **tab);
 char				*ft_itoa_base(int value, int base);
 void				ft_swap(int *a, int *b);
@@ -116,5 +116,11 @@ int					ft_isnegative(int n);
 int					get_next_line(const int fd, char **line);
 double				ft_degtorad(double deg);
 double				ft_radtodeg(double rad);
+double				ft_pow(double nb, int e);
+double				ft_atod(const char *str);
+int					ft_tablen(char **str);
+void				ft_deltab(void *content, size_t content_size);
+void				ft_lstrev(t_list **alst);
+int					ft_strdigit(const char *s);
 
 #endif

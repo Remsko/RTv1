@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 10:26:47 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/03/03 11:09:31 by jpicot           ###   ########.fr       */
+/*   Updated: 2018/03/08 12:05:20 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define VECTOR_UTILITIES_H
 
 # include "rtv1.h"
-
-double	vector_len(t_point a);
 
 double	dot_product(t_point a, t_point b);
 

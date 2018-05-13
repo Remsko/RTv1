@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/03/08 17:44:25 by rpinoit           #+#    #+#              #
+#    Updated: 2018/03/08 17:58:17 by rpinoit          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = libft.a
 CC = gcc
 RM = rm -f
@@ -71,7 +83,14 @@ FILES = ft_lstdel.c \
 		ft_isnegative.c \
 		get_next_line.c \
 		ft_degtorad.c \
-		ft_radtodeg.c 
+		ft_radtodeg.c \
+		ft_atod.c \
+		ft_pow.c \
+		ft_tablen.c \
+		ft_deltab.c \
+		ft_lstrev.c \
+		ft_strdigit.c
+
 O_DIR = ft_lstdel.o \
 		ft_memmove.o \
 		ft_strchr.o \
@@ -141,7 +160,14 @@ O_DIR = ft_lstdel.o \
 		ft_isnegative.o \
 		get_next_line.o \
 		ft_degtorad.o \
-		ft_radtodeg.o
+		ft_radtodeg.o \
+		ft_atod.o \
+	   	ft_pow.o \
+		ft_tablen.o \
+		ft_deltab.o \
+		ft_lstrev.o \
+		ft_strdigit.o
+
 all: $(NAME)
 
 $(NAME):

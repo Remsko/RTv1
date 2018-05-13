@@ -6,11 +6,12 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 18:25:39 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/03/07 13:58:39 by rpinoit          ###   ########.fr       */
+/*   Updated: 2018/03/08 19:08:04 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+#include "vector_utilities.h"
 
 void	set_ambient_light(t_color *c, t_object obj)
 {
@@ -47,15 +48,16 @@ void	add_diffuse_light(t_color *c, t_object obj, t_light *light, double cos)
 
 void	add_specular_light(t_color *c, t_point r_pos, t_intersection *inter)
 {
-	t_point	vision;
 	t_point	refra;
+	t_point	vision;
 	double	cos_omega;
+	t_point	tmp;
 	double	light_i;
 
 	light_i = 0.8;
-	refra = vector_sub(vector_multiply(inter->normal,
-				2.0 * dot_product(inter->normal,
-					inter->light_vector)), inter->light_vector);
+	tmp = vector_multiply(inter->normal,
+			2.0 * dot_product(inter->normal, inter->light_vector));
+	refra = vector_sub(tmp, inter->light_vector);
 	normalize_vector(&refra);
 	vision = vector_sub(r_pos, inter->pos);
 	normalize_vector(&vision);

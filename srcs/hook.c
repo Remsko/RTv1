@@ -6,79 +6,83 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 12:06:14 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/03/05 10:42:08 by jpicot           ###   ########.fr       */
+/*   Updated: 2018/03/09 14:34:38 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static int		rot_obj_keyhook(const int key, t_env *env)
+int		rot_cam_keyhook(const int key, t_env *env)
 {
-	if (key == KEY_LEFT)
-		env->obj_rot.y = env->obj_rot.y == 350 ? 0 : env->obj_rot.y + 10;
-	else if (key == KEY_RIGHT)
-		env->obj_rot.y = env->obj_rot.y == -350 ? 0 : env->obj_rot.y - 10;
-	else if (key == KEY_UP)
-		env->obj_rot.x = env->obj_rot.x == 350 ? 0 : env->obj_rot.x + 10;
-	else if (key == KEY_DOWN)
-		env->obj_rot.x = env->obj_rot.x == -350 ? 0 : env->obj_rot.x - 10;
-	else if (key == KEY_PLUS)
-		env->obj_rot.z = env->obj_rot.z == 350 ? 0 : env->obj_rot.z + 10;
-	else if (key == KEY_MINUS)
-		env->obj_rot.z = env->obj_rot.z == -350 ? 0 : env->obj_rot.z - 10;
-	return (1);
-}
+	t_point *rot;
 
-static int		rot_cam_keyhook(const int key, t_env *env)
-{
+	rot = &env->scene.cam.rot;
 	if (key == KEY_D)
-		env->cam_rot.y = env->cam_rot.y == 350 ? 0 : env->cam_rot.y + 10;
+		rot->y = rot->y == 350 ? 0 : rot->y + 10;
 	else if (key == KEY_A)
-		env->cam_rot.y = env->cam_rot.y == -350 ? 0 : env->cam_rot.y - 10;
+		rot->y = rot->y == 350 ? 0 : rot->y - 10;
 	else if (key == KEY_W)
-		env->cam_rot.x = env->cam_rot.x == 350 ? 0 : env->cam_rot.x + 10;
+		rot->x = rot->x == 350 ? 0 : rot->x + 10;
 	else if (key == KEY_S)
-		env->cam_rot.x = env->cam_rot.x == -350 ? 0 : env->cam_rot.x - 10;
+		rot->x = rot->x == 350 ? 0 : rot->x - 10;
 	else if (key == KEY_1)
-		env->cam_rot.z = env->cam_rot.z == 350 ? 0 : env->cam_rot.z + 10;
+		rot->z = rot->z == 350 ? 0 : rot->z + 10;
 	else if (key == KEY_2)
-		env->cam_rot.z = env->cam_rot.z == -350 ? 0 : env->cam_rot.z - 10;
+		rot->z = rot->z == 350 ? 0 : rot->z - 10;
 	return (1);
 }
 
-static int		pos_cam_keyhook(int key, t_env *env)
+int		pos_cam_keyhook(int key, t_env *env)
 {
 	if (key == KEY_I)
-		env->scene.cam.pos.z += 10;
+		env->scene.cam.pos.z += 0;
 	else if (key == KEY_K)
-		env->scene.cam.pos.z -= 10;
+		env->scene.cam.pos.z -= 0;
 	else if (key == KEY_L)
-		env->scene.cam.pos.x += 10;
+		env->scene.cam.pos.x += 0;
 	else if (key == KEY_J)
-		env->scene.cam.pos.x -= 10;
+		env->scene.cam.pos.x -= 0;
 	else if (key == KEY_9)
-		env->scene.cam.pos.y += 10;
+		env->scene.cam.pos.y += 0;
 	else if (key == KEY_8)
-		env->scene.cam.pos.y -= 10;
+		env->scene.cam.pos.y -= 0;
 	return (1);
 }
 
-int		key_hook(int key, t_env *env)
+int		key_press(int key, t_env *env)
 {
 	if (key == KEY_ESCAPE)
 	{
 		mlx_destroy_window(env->mlx, env->win);
 		exit(EXIT_SUCCESS);
 	}
-	else if ((key > 122 && key < 127) || key == 24 || key == 27)
-		env->mark = rot_obj_keyhook(key, env);
 	else if (key == KEY_A || key == KEY_D || key == KEY_W || key == KEY_S \
 			|| key == KEY_1 || key == KEY_2)
 		env->mark = rot_cam_keyhook(key, env);
-	else if (key == KEY_I || key == KEY_K || key == KEY_L || key == KEY_J || key == KEY_9 \
+	else if (key == KEY_I || key == KEY_K || key == KEY_L || key == KEY_J
+			|| key == KEY_9 \
 			|| key == KEY_8)
 		env->mark = pos_cam_keyhook(key, env);
-	if (env->mark == 1)
-		mlx_draw_rt(env);
+	else if (key == KEY_M)
+	{
+		if (env->ambilight == 0)
+			env->ambilight = 1;
+		else
+			env->ambilight = 0;
+		env->mark = 1;
+	}
+	return (0);
+}
+
+int		mouse_motion(unsigned int x, unsigned int y, t_env *e)
+{
+	if (x < (unsigned int)e->win_w && y < (unsigned int)e->win_h)
+	{
+		e->active_icon = 0;
+		if (x >= 1033 && x <= 1133 && y >= 33 && y <= 133)
+			e->active_icon = 1;
+		else if (x >= 1166 && x <= 1266 && y >= 33 && y <= 133)
+			e->active_icon = 3;
+	}
 	return (0);
 }

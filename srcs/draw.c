@@ -6,15 +6,16 @@
 /*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 12:09:11 by rpinoit           #+#    #+#             */
-/*   Updated: 2018/03/05 10:07:58 by jpicot           ###   ########.fr       */
+/*   Updated: 2018/03/08 18:35:29 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+#include "raytracer.h"
 
-void put_pixel(t_env *env, t_point *pos, t_color c)
+void		put_pixel(t_env *env, t_point *pos, t_color c)
 {
-	int pts;
+	int		pts;
 
 	(void)c;
 	pts = ((int)pos->x * 4) + ((int)pos->y * env->thenv[0]->sline);
@@ -23,11 +24,11 @@ void put_pixel(t_env *env, t_point *pos, t_color c)
 	env->thenv[0]->data[++pts] = c.r;
 }
 
-void	mlx_draw_rt(t_env *env)
+void		mlx_draw_rt(t_env *env)
 {
 	env->img = mlx_new_image(env->mlx, env->win_w, env->win_h);
 	env->data = mlx_get_data_addr(env->img, &env->bpp, &env->sline,
-			&env->endian);
+				&env->endian);
 	env->i_th = -1;
 	while (++env->i_th < NBTHREAD)
 	{
@@ -37,7 +38,8 @@ void	mlx_draw_rt(t_env *env)
 			env->thenv[env->i_th]->thenv[0] = env;
 		}
 		env->thenv[env->i_th]->i_th = env->i_th;
-		if (pthread_create(&env->tid[env->i_th], NULL, raytracer_process, env->thenv[env->i_th]) != 0)
+		if (pthread_create(&env->tid[env->i_th], NULL, raytracer_process,
+					env->thenv[env->i_th]) != 0)
 			ft_putstr("Erreur de thread.\n");
 	}
 	env->i_th = -1;
@@ -45,6 +47,5 @@ void	mlx_draw_rt(t_env *env)
 		pthread_join(env->tid[env->i_th], NULL);
 	env->init = 1;
 	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
-	mlx_destroy_image(env->mlx, env->img);
 	env->mark = 0;
 }

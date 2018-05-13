@@ -6,7 +6,7 @@
 #    By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/24 11:54:00 by rpinoit           #+#    #+#              #
-#    Updated: 2018/03/05 19:42:12 by ada-cunh         ###   ########.fr        #
+#    Updated: 2018/03/09 13:40:23 by rpinoit          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC = srcs/main.c \
 	  srcs/parser.c \
 	  srcs/parser_obj.c \
 	  srcs/parser_utils.c \
-	  srcs/parser_libft.c \
+	  srcs/parser_fill.c \
 	  srcs/math_utilities.c \
 	  srcs/pixel.c \
 	  srcs/obj_normal.c \
@@ -31,11 +31,8 @@ SRC = srcs/main.c \
 	  srcs/vector_rotate.c \
 	  srcs/draw.c \
 	  srcs/hook.c \
-	  srcs/anti_alias.c \
-	  srcs/set_perlin.c \
-	  srcs/set_param_perlin.c \
-	  srcs/inter_perlin.c \
-	  srcs/main_perlin.c
+	  srcs/hook2.c \
+	  srcs/anti_alias.c 
 
 OBJ = $(SRC:%.c=%.o)
 
@@ -63,6 +60,3 @@ fclean: clean
 	rm -rf $(OBJ)
 
 re: clean all
-
-rex: clean all
-	./$(NAME) scenes/scene1.rt

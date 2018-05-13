@@ -6,16 +6,11 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 10:30:57 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/03/03 11:23:59 by jpicot           ###   ########.fr       */
+/*   Updated: 2018/03/08 12:06:47 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-double	vector_len(t_point a)
-{
-	return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
-}
 
 double	dot_product(t_point a, t_point b)
 {
@@ -55,7 +50,7 @@ t_point	vector_sub(t_point p1, t_point p2)
 	return (p);
 }
 
-t_point vector_add(t_point p1, t_point p2)
+t_point	vector_add(t_point p1, t_point p2)
 {
 	t_point p;
 

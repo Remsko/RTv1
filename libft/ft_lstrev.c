@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawer.h                                           :+:      :+:    :+:   */
+/*   ft_lstrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpinoit <rpinoit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/24 18:31:13 by ada-cunh          #+#    #+#             */
-/*   Updated: 2018/03/03 11:18:27 by jpicot           ###   ########.fr       */
+/*   Created: 2018/03/08 17:55:23 by rpinoit           #+#    #+#             */
+/*   Updated: 2018/03/08 18:01:02 by rpinoit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DRAWER_H
-# define DRAWER_H
+#include "libft.h"
 
-# include "rtv1.h"
+void	ft_lstrev(t_list **alst)
+{
+	t_list *cur;
+	t_list *next;
+	t_list *prev;
 
-void	drawer_init(t_env *env);
-
-void	drawer_process(t_env *env);
-
-void	drawer_destroy(t_env *env);
-
-void	drawer_putpixel(t_env *env, t_2ipair p, t_color c);
-
-#endif
+	prev = NULL;
+	cur = *alst;
+	while (cur != NULL)
+	{
+		next = cur->next;
+		cur->next = prev;
+		prev = cur;
+		cur = next;
+	}
+	*alst = prev;
+}
